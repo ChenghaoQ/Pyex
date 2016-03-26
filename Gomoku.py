@@ -3,6 +3,40 @@ def main():
 	playboard=[]
 	playboard=InitBoard(playboard)
 	counter=0
+	printBoard(playboard)
+	while True:
+		
+		print("* * * * 白方，棋子为'O'* * * * ")
+		while True:
+			row=int(input("请输入横行坐标："))
+			col=int(input("请输入竖行坐标："))
+			row-=1;col-=1;
+			if checkoccupation(playboard,row,col)==True:
+				movepiece(playboard,row,col,counter)
+				printBoard(playboard)
+				counter+=1
+				break
+			else:
+				print("对不起，此处已有棋子，请重新输入！")
+		if Checkifwin(playboard,row,col,counter) == True:
+			print("\n\n\n\白方胜！！\n\n\n")
+			break
+		print("* * * * 黑棋，棋子为'X'* * * * ")
+		while True:
+			row=int(input("请输入横行坐标："))
+			col=int(input("请输入竖行坐标："))
+			row-=1;col-=1;
+			if checkoccupation(playboard,row,col)==True:
+				movepiece(playboard,row,col,counter)
+				printBoard(playboard)
+				counter+=1
+				break
+			else:
+				print("对不起，此处已有棋子，请重新输入！")
+		if Checkifwin(playboard,row,col,counter) == True:
+			print("\n\n\n\黑方胜！！\n\n\n")
+			break
+	
 
 
 def InitBoard(board):
@@ -10,8 +44,12 @@ def InitBoard(board):
 	return board
 def printBoard(board):
 	i=0
+	print("   ",end='')
 	for i in range(15):
-		print(board[i])
+		print("%d"%(i+1)+' 'if i<9 else "%d"%(i+1) ,end='')
+	print("\n")
+	for i in range(15):
+		print("%d"%(i+1)+' '+' '.join(board[i]) if i+1>=10  else "%d"%(i+1)+'  '+' '.join(board[i]))
 def Checkifwin(board,x,y,times):
 	if times%2==0:
 		piece='O'
@@ -35,9 +73,10 @@ def movepiece(board,row,col,times):
 	
 	if board[row][col]=='+':
 		board[row][col]=piece
-def checkoccuption():
-	if board[row][col]!='+'
+def checkoccupation(board,row,col):
+	if board[row][col]!='+':
 		return False
-	else
+	else:
 		return True
-		
+
+main()		
