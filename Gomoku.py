@@ -54,17 +54,21 @@ def Checkifwin(board,x,y,times):
 	if times%2==0:
 		piece='O'
 	else:
-		piece='X'	
-	if board[x-2][y-2]==piece and board[x-1][y-1]==piece and board[x][y]==piece and board[x+1][y+1]==piece and board[x+2][y+2]==piece:
-		return True
-	elif board[x-2][y]==piece and board[x-1][y]==piece and board[x][y]    ==piece and board[x+1][y]==piece and board[x+2][y]==piece:
-		return True
-	elif board[x][y-2]==piece and board[x][y-1]==piece and board[x][y]    ==piece and board[x][y+1]==piece and board[x][y+2]==piece:
-		return True
-	elif board[x-2][y+2]==piece and board[x-1][y+1]==piece and board[x][y]    ==piece and board[x+1][y-1]==piece and board[x+2][y-2]==piece:
-		return True
-	else:
-		return False
+		piece='X'
+	a=0;b=0;c=0;d=0;i=0;j=0;
+	direc=[[1,0][1,1][0,1][-1,1][-1,0][-1,-1][0,-1][1,-1]]
+	for i in range(8):
+		for j in range(5):
+			if board[row+direc[i][0]][col+direc[i][1]]==board[row][col]:
+				if direc[i][0]==0:
+					a+=1
+				elif direc[i][1]==0:
+					b+=1
+				#Unsure with the line below
+				elif direc[i][0] != 0 and direc[i][1]==1:
+					c+=1
+				elif direc[i][1]==-1:
+					d+=1
 def movepiece(board,row,col,times):
 	if times%2==0:
 		piece='O'
