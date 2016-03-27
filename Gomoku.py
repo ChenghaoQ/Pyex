@@ -50,25 +50,33 @@ def printBoard(board):
 	print("\n")
 	for i in range(15):
 		print("%d"%(i+1)+' '+' '.join(board[i]) if i+1>=10  else "%d"%(i+1)+'  '+' '.join(board[i]))
-def Checkifwin(board,x,y,times):
+def Checkifwin(board,row,col,times):
 	if times%2==0:
 		piece='O'
 	else:
 		piece='X'
 	a=0;b=0;c=0;d=0;i=0;j=0;
-	direc=[[1,0][1,1][0,1][-1,1][-1,0][-1,-1][0,-1][1,-1]]
+	direc=[[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]]
 	for i in range(8):
-		for j in range(5):
+		for j in range(4):
 			if board[row+direc[i][0]][col+direc[i][1]]==board[row][col]:
 				if direc[i][0]==0:
 					a+=1
 				elif direc[i][1]==0:
 					b+=1
 				#Unsure with the line below
-				elif direc[i][0] != 0 and direc[i][1]==1:
+				elif direc[i][0] == direc[i][1]:
 					c+=1
-				elif direc[i][1]==-1:
+				else:
 					d+=1
+				row+=direc[i][0]
+				col+=direc[i][1]
+			else:
+				break
+	if a==4 or b==4 or c==4 or d==4:
+		return True
+	else:
+		return False
 def movepiece(board,row,col,times):
 	if times%2==0:
 		piece='O'
