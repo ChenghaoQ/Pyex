@@ -3,6 +3,40 @@ def main():
 	playboard=[]
 	playboard=InitBoard(playboard)
 	counter=0
+	printBoard(playboard)
+	while True:
+		
+		print("* * * * 白方，棋子为'O'* * * * ")
+		while True:
+			row=int(input("请输入横行坐标："))
+			col=int(input("请输入竖行坐标："))
+			row-=1;col-=1;
+			if checkoccupation(playboard,row,col)==True:
+				movepiece(playboard,row,col,counter)
+				printBoard(playboard)
+				counter+=1
+				break
+			else:
+				print("对不起，此处已有棋子，请重新输入！")
+		if Checkifwin(playboard,row,col,counter) == True:
+			print("\n\n\n\白方胜！！\n\n\n")
+			break
+		print("* * * * 黑棋，棋子为'X'* * * * ")
+		while True:
+			row=int(input("请输入横行坐标："))
+			col=int(input("请输入竖行坐标："))
+			row-=1;col-=1;
+			if checkoccupation(playboard,row,col)==True:
+				movepiece(playboard,row,col,counter)
+				printBoard(playboard)
+				counter+=1
+				break
+			else:
+				print("对不起，此处已有棋子，请重新输入！")
+		if Checkifwin(playboard,row,col,counter) == True:
+			print("\n\n\n\黑方胜！！\n\n\n")
+			break
+	
 
 
 def InitBoard(board):
@@ -10,20 +44,36 @@ def InitBoard(board):
 	return board
 def printBoard(board):
 	i=0
+	print("   ",end='')
 	for i in range(15):
-		print(board[i])
-def Checkifwin(board,x,y,times):
+		print("%d"%(i+1)+' 'if i<9 else "%d"%(i+1) ,end='')
+	print("\n")
+	for i in range(15):
+		print("%d"%(i+1)+' '+' '.join(board[i]) if i+1>=10  else "%d"%(i+1)+'  '+' '.join(board[i]))
+def Checkifwin(board,row,col,times):
 	if times%2==0:
 		piece='O'
 	else:
-		piece='X'	
-	if board[x-2][y-2]==piece and board[x-1][y-1]==piece and board[x][y]==piece and board[x+1][y+1]==piece and board[x+2][y+2]==piece:
-		return True
-	elif board[x-2][y]==piece and board[x-1][y]==piece and board[x][y]    ==piece and board[x+1][y]==piece and board[x+2][y]==piece:
-		return True
-	elif board[x][y-2]==piece and board[x][y-1]==piece and board[x][y]    ==piece and board[x][y+1]==piece and board[x][y+2]==piece:
-		return True
-	elif board[x-2][y+2]==piece and board[x-1][y+1]==piece and board[x][y]    ==piece and board[x+1][y-1]==piece and board[x+2][y-2]==piece:
+		piece='X'
+	a=0;b=0;c=0;d=0;i=0;j=0;
+	direc=[[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]]
+	for i in range(8):
+		for j in range(4):
+			if board[row+direc[i][0]][col+direc[i][1]]==board[row][col]:
+				if direc[i][0]==0:
+					a+=1
+				elif direc[i][1]==0:
+					b+=1
+				#Unsure with the line below
+				elif direc[i][0] == direc[i][1]:
+					c+=1
+				else:
+					d+=1
+				row+=direc[i][0]
+				col+=direc[i][1]
+			else:
+				break
+	if a==4 or b==4 or c==4 or d==4:
 		return True
 	else:
 		return False
@@ -35,9 +85,10 @@ def movepiece(board,row,col,times):
 	
 	if board[row][col]=='+':
 		board[row][col]=piece
-def checkoccuption():
-	if board[row][col]!='+'
+def checkoccupation(board,row,col):
+	if board[row][col]!='+':
 		return False
-	else
+	else:
 		return True
-		
+
+main()		
