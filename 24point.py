@@ -30,40 +30,15 @@ def calculate(list1):
 	num = 0
 	pos=[[0,1,2],[0,2,1],[1,2,0]]
 	for calc1 in range(4):
-		if calc1 == 0:
-			num = plus(list1[0],list1[1])
-		if calc1 == 1:
-			num = minus(list1[0],list1[1])
-		if calc1 == 2:
-			num = muti(list1[0],list1[1])
-		if calc1 == 3:
-			num = divid(list1[0],list1[1])
+		num=fouroperation(list1[0],list1[1],calc1)
 		list2 = [num,list1[2],list1[3]]
 		for calc2 in pos:
 			n1,n2,n3=calc2
 			for calc2 in range(4):
-				if calc2 == 0:
-					num = plus(list2[n1],list2[n2])
-				if calc2 == 1:
-					num = minus(list2[n1],list2[n2])
-				if calc2 == 2:
-					num = muti(list2[n1],list2[n2])
-				if calc2 == 3:
-					num = divid(list2[n1],list2[n2])
+				num= fouroperation(list2[n1],list2[n2],calc2)
 				list3 = [num,list2[n3]]
 				for calc3 in range(6):
-					if calc3 == 0:
-						num = plus(list3[0],list3[1])
-					if calc3 == 1:
-						num = minus(list3[0],list3[1])
-					if calc3 == 2:
-						num = muti(list3[0],list3[1])
-					if calc3 == 3:
-						num = divid(list3[0],list3[1])
-					if calc3 == 4:
-						num = minus(list3[1],list3[0])
-					if calc3 == 5:
-						num = divid(list3[1],list3[0])
+					num =fouroperation(list3[0],list3[1],calc3)
 					if num == 24:
 						Str1 ='('+str(list1[0])+sign(calc1)+str(list1[1])+')'
 						#Str1 = " ".join(Str1)
@@ -117,17 +92,18 @@ def position(list1):
 					counter+=1  				
 	return distr						
 
-def plus(x,y):
-	return x+y
-def minus(x,y):
-	return x-y
-def muti(x,y):
-	return x*y
-def divid(x,y):
-	if y== 0:
-		return 5000
-	else:
-		return x/y
+def fouroperation(x,y,calc):
+	if calc==0:
+		return x+y
+	elif calc==1 or calc ==4:
+		return x-y
+	elif cacl==2:
+		return x*y
+	elif calc==3 or calc==5:
+		if y== 0:
+			return 5000
+		else:
+			return x/y
 def sign(x):
 	if x==0:
 		return '+'
