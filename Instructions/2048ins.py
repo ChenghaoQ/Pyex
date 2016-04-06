@@ -124,7 +124,7 @@ def move_row_left(row):
                                         new_row.append(0)
                                 else:
                                         new_row.append(0)
-                asset len(new_row) == len(row)
+                assert len(new_row) == len(row)
                 return new_row
                 ##先挤到一块再合并再挤到一块
         return tighten(merge(tighten(row)))  #?????????????????
