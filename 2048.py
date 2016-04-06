@@ -7,7 +7,12 @@ letter_code=[ord(ch) for ch in 'WASDRQwasdrq']
 action_dict=dict(zip(letter_code,actions*2) 
 #Main function
 def main(stdscr):   #stdscr is in curses library
-
+	def init(): # reset the game field and restart the game
+		game_field.reset(0 # using game_field not GameField because there is a statement below
+		return 'Game'	#can we use dictionary like this? why>
+	
+	def not_game(): #Not game status is for gameover or win after game
+		game_field.draw(stdscr)   #other than self, there is another variable in it
 
 
 
@@ -29,7 +34,7 @@ def transpose(field):
 def invert(field):
 	return [row[::-1] for row in field] #matix get inverted, [::-1] is for invert a string
 
-class GameField(object):
+class GameField(object): #where did screen, direction comes from
 	def __inti__(self,height=4,width-4,win=2048) #init the args to the self
 		self.height=height        #Height =4
 		self.width=width 	  #Width=4
@@ -37,10 +42,54 @@ class GameField(object):
 		self.score=0		  #init score=0
 		self.highscore		  #The history highest
 		self.reset()		  #reset gamefield(all settings),call a function defined later
+
+	def draw(self,screen):
+		help_string1= '(W)Up (S)Down (A)Left (D)Right '
+		help_string2 = '     (R)Restart (Q)Exit'
+		gameover_string='		GAME OVER'
+		win_string='		You win'
+		def cast(string):
+			screen.addstr(string+'\n')
+
+		def draw_hor_separator():#why?
+			line='+' +('+------' * self.width + '+')[1:] #You cannot remove the first + in '+------" because you need it for the following lines, use [1:] to cut the first +
+			separator =defaultdict(lambda:line) # what does defaultdict do
+			if not hasattr(draw_hor_separator,"counter"): # what?
+				draw_hor_separator.counter = 0
+				cast(separator[draw_hor_separator.counter]) 
+				draw_hor_separatorcounter +=1
+
+		def draw_row(row):
+			cast(''.join('|{: ^5} '.format(num) if num > 0 else '|      ' for num in row) + '|')# what ??
+
+		screen.clear()
+
 	def spawn(self):   #spawn mean produce a random 2 or 4
 		new_element =4 if randrange(100)>89 else 2 #initial the probability of 2 or 4
 		(i,j)=choice([0 for i in range(self.width)] for j in range(self.height))#i,j emulate a matrix of the game field and use the random choice to fill one space,not filling the space ,just get the coordinate
 		self.field[i][j] = new_element #fill the coordinate
+	
+	def move_is_possible(self,directioin): # this part looks same to the move function
+		def row_is_left_moveable(row): #check if numbers can move to the left
+			def change(i):
+				if row[i] ==0 and row[i+1]!=0    #if the number on the left is None and has number on the right
+					return True      #Movable
+				if row[i] !=0 and row[i+1] == row[i]:      #if it has same number tightened
+					return True	#Mergeable
+				return False		#attention here, not using eles:return False(Set False as default)
+			return any(change(i) for i in range(len(row)-1) # if iterable has a True, return True ,All false, return false, this function check if there is at lease one situdation satisfied
+		check={}#build a dict for the check of four direction
+		check['Left'] =lambda field:any(row_is_left_movable(row) for row in field)
+		check['Right']=lambda field: check['Left'](invert(field))
+		check['Up'] =lambda field: check['Left'](transpose(field))
+		check['Down'] =lambda field check['Right'](transpose(field))
+
+		if direction in check: #if the direction has a match value in check
+			return check[direction](self.field)  #why has ( )
+		else:
+			return False
+	
+	
 	
 	def move(self,direction): #other than the self element, move also need directions inputed by users
 		def move_row_left(row): #(Use left would be easier!)We can just make one sitution to process, and using matrix turn to finish other steps, it is same as copy 3 times,!!!We need to know the numbers elements in a row, 4 is default!!!!!
@@ -82,7 +131,16 @@ class GameField(object):
 					return True #move is True, so you still can move
 				else:
 					return False #You cannot move, what will hapen?~~
-			
+		
+		def is_win(self):
+			return any(any(i >= self.win_value for i in row) for row in self.field)# check any numbers in the field >= 2048
+
+		def is_gameover(self):
+			return not any(self.move_is_possible(move) for move in actions) #when is_win is false and cannot move, gameover
+
+
+
+		
 		
 
 
