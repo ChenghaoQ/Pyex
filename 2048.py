@@ -13,8 +13,42 @@ def main(stdscr):   #stdscr is in curses library
 	
 	def not_game(): #Not game status is for gameover or win after game
 		game_field.draw(stdscr)   #other than self, there is another variable in it
+		action = get _user_action(stdscr)#where is this
+		responses = defaultdict(lambda:state) #default is current status, no action will keep the current status
+		response['Restart'],response['Exit'] ='Init','Exit' # Restart need to  init again, exit just exit
+		
+		return responses[action]
+	def game():
+		game_field.draw(stdscr) # draw the current field status
+		action=get_user_action(stdscr)
 
+		if action =='Restart':
+			return 'Init'
+		if action =='Exit':
+			return 'Exit'
+		if game_field.ove(action): # move successful ( move not none)
+			if game_field.is_win():
+				return 'Win'
+			if game_field.is_gameover():
+				return 'Gameover'
+		return 'Game'
 
+	state_actions ={'Init':init,
+			'Win':lambda:not_game('Win'),
+			'Gameover':lambda:not_game('Gameover'),
+			'Game':game
+		}
+
+	cureses.use_default_colors()
+	game_field=GameField(win=32) # how to change to Mac
+	
+	state='Init' # initialize the state
+
+	# circulated the status machine
+	while state !='Exit'
+		state = state_actions[state]() # why () again		
+
+curses.wrapper(main) # Wrap as curses
 
 
 
