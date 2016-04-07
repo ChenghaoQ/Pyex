@@ -4,23 +4,23 @@ from collections import defaultdict #still not sure what does defaultdict
 
 actions=['Up','Left','Down','Right','Restart','Exit']
 letter_code=[ord(ch) for ch in 'WASDRQwasdrq']   
-action_dict=dict(zip(letter_code,actions*2) 
+action_dict=dict(zip(letter_code,actions*2)) 
 #Main function
 def main(stdscr):   #stdscr is in curses library
 	def init(): # reset the game field and restart the game
-		game_field.reset(0 # using game_field not GameField because there is a statement below
+		game_field.reset() # using game_field not GameField because there is a statement below
 		return 'Game'	#can we use dictionary like this? why>
 	
 	def not_game(): #Not game status is for gameover or win after game
 		game_field.draw(stdscr)   #other than self, there is another variable in it
-		action = get _user_action(stdscr)#where is this
+		action = get_user_action(stdscr)#where is this
 		responses = defaultdict(lambda:state) #default is current status, no action will keep the current status
 		response['Restart'],response['Exit'] ='Init','Exit' # Restart need to  init again, exit just exit
 		
-		return responses[action]
+		return responses[action]#Return the users respones
 	def game():
 		game_field.draw(stdscr) # draw the current field status
-		action=get_user_action(stdscr)
+		action=get_user_action(stdscr)#get useer action
 
 		if action =='Restart':
 			return 'Init'
@@ -33,7 +33,7 @@ def main(stdscr):   #stdscr is in curses library
 				return 'Gameover'
 		return 'Game'
 
-	state_actions ={'Init':init,
+	state_actions ={'Init':init,  #put state into a dictionary
 			'Win':lambda:not_game('Win'),
 			'Gameover':lambda:not_game('Gameover'),
 			'Game':game
@@ -45,8 +45,8 @@ def main(stdscr):   #stdscr is in curses library
 	state='Init' # initialize the state
 
 	# circulated the status machine
-	while state !='Exit'
-		state = state_actions[state]() # why () again		
+	while state !='Exit':
+		state = state_actions[state]() # state_action[state] from dictionary actually is a function, so put the argument in the ()	
 
 curses.wrapper(main) # Wrap as curses
 
@@ -69,7 +69,7 @@ def invert(field):
 	return [row[::-1] for row in field] #matix get inverted, [::-1] is for invert a string
 
 class GameField(object): #where did screen, direction comes from
-	def __inti__(self,height=4,width-4,win=2048) #init the args to the self
+	def __inti__(self,height=4,width=4,win=2048): #init the args to the self
 		self.height=height        #Height =4
 		self.width=width 	  #Width=4
 		self.win_value=2048	  #2048 to win
@@ -85,7 +85,7 @@ class GameField(object): #where did screen, direction comes from
 		def cast(string):
 			screen.addstr(string+'\n')
 
-		def draw_hor_separator():#why?
+		def draw_hor_separator():#shows how to draw the hor_separator
 			line='+' +('+------' * self.width + '+')[1:] #You cannot remove the first + in '+------" because you need it for the following lines, use [1:] to cut the first +
 			separator =defaultdict(lambda:line) # what does defaultdict do
 			if not hasattr(draw_hor_separator,"counter"): # what?
@@ -93,10 +93,25 @@ class GameField(object): #where did screen, direction comes from
 				cast(separator[draw_hor_separator.counter]) 
 				draw_hor_separatorcounter +=1
 
-		def draw_row(row):
+		def draw_row(row):# shows how to draw the row, calls later
 			cast(''.join('|{: ^5} '.format(num) if num > 0 else '|      ' for num in row) + '|')# what ??
 
-		screen.clear()
+		screen.clear() # refresh the screen
+		cast('SCORE: ' + str(self.score))  # display the score
+		if 0 != self.highscore:
+			cast('HIGHSCORE: ' + str(self.highscore))
+		for row in self.field: # draw the field
+			draw_hor_separator()
+			draw_row(row)
+		draw_hor_separator()# draw the last line
+		if self.is_win():
+			cast(win_string)
+		else:
+			if self.is_gameover():
+				cast(gameover_string)
+			else:
+				cast(help_string1)
+		cast(help_string2)
 
 	def spawn(self):   #spawn mean produce a random 2 or 4
 		new_element =4 if randrange(100)>89 else 2 #initial the probability of 2 or 4
