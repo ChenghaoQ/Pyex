@@ -59,7 +59,7 @@ def get_user_action(keyboard): #Where does keyboard comes from, input?
 	char="N"
 	while char not in action_dict:  #while user input doesn't match action_dict
 		char=keyboard.getch()#?????getch???
-		return action_dict[char]
+	return action_dict[char]
 #转置
 def transpose(field):
 	return [list(row) for row in zip(*field)]#matrix turn 90 clockwise, reason is using zip to get first letter of each row(first column) to make a new first row, ohters are the same
@@ -158,25 +158,25 @@ class GameField(object): #where did screen, direction comes from
 							pair=True
 							new_row.append(0) #e.g.[2,2,0,0]=>[4,0,0,0], a 0 should be append???????how do they solve [4,4,2,2]?
 						else:
-							new_row.append(0)
+							new_row.append(row[i])
 				assert len(new_row) == len(row)# ???????????
 				return new_row
 			#So here, we need to tighten them first and merge them then tighten again
 			return tighten(merge(tighten(row)))
 
-			moves={} #Build a dictionary {action:operation}
-			moves['Left']= lambda field:[move_row_left(row) for row in field]
-			moves['Right']= lambda field: invert(moves['Left'](invert(field)))		
-			moves['Up'] = lambda field : transpose(move['Left'](invert(field)))
-			moves['Down'] = lambda field: transpose(moves['Right'](transpose(field)))
-			#Why using lambda here???
-			if direction in moves:
-				if self.move_is_possible(direction): #What is this?????
-					self.field=move[direction](self.field)#why there is a () ,need a test here
-					self.spawn()# after move, there should be a new one comes 
-					return True #move is True, so you still can move
-				else:
-					return False #You cannot move, what will hapen?~~
+		moves={} #Build a dictionary {action:operation}
+		moves['Left']= lambda field:[move_row_left(row) for row in field]
+		moves['Right']= lambda field: invert(moves['Left'](invert(field)))		
+		moves['Up'] = lambda field : transpose(moves['Left'](transpose(field)))
+		moves['Down'] = lambda field: transpose(moves['Right'](transpose(field)))
+		#Why using lambda here???
+		if direction in moves:
+			if self.move_is_possible(direction): #check if move_if_possible with direction input is true
+				self.field=moves[direction](self.field)#why there is a () ,need a test here
+				self.spawn()# after move, there should be a new one comes 
+				return True #move is True, so you still can move
+			else:
+				return False #You cannot move, what will hapen?~~
 		
 	def is_win(self):
 			return any(any(i >= self.win_value for i in row) for row in self.field)# check any numbers in the field >= 2048
