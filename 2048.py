@@ -26,7 +26,7 @@ def main(stdscr):   #stdscr is in curses library
 			return 'Init'
 		if action =='Exit':
 			return 'Exit'
-		if game_field.ove(action): # move successful ( move not none)
+		if game_field.move(action): # move successful ( move not none)
 			if game_field.is_win():
 				return 'Win'
 			if game_field.is_gameover():
@@ -39,7 +39,7 @@ def main(stdscr):   #stdscr is in curses library
 			'Game':game
 		}
 
-	cureses.use_default_colors()
+	curses.use_default_colors()
 	game_field=GameField(win=32) # how to change to Mac
 	
 	state='Init' # initialize the state
@@ -48,7 +48,6 @@ def main(stdscr):   #stdscr is in curses library
 	while state !='Exit':
 		state = state_actions[state]() # state_action[state] from dictionary actually is a function, so put the argument in the ()	
 
-curses.wrapper(main) # Wrap as curses
 
 
 
@@ -60,7 +59,7 @@ def get_user_action(keyboard): #Where does keyboard comes from, input?
 	char="N"
 	while char not in action_dict:  #while user input doesn't match action_dict
 		char=keyboard.getch()#?????getch???
-		return actions_dict[char]
+		return action_dict[char]
 #转置
 def transpose(field):
 	return [list(row) for row in zip(*field)]#matrix turn 90 clockwise, reason is using zip to get first letter of each row(first column) to make a new first row, ohters are the same
@@ -69,12 +68,12 @@ def invert(field):
 	return [row[::-1] for row in field] #matix get inverted, [::-1] is for invert a string
 
 class GameField(object): #where did screen, direction comes from
-	def __inti__(self,height=4,width=4,win=2048): #init the args to the self
+	def __init__(self,height=4,width=4,win=2048): #init the args to the self, Recently error write init wrong will cause the class object take no(arg)
 		self.height=height        #Height =4
 		self.width=width 	  #Width=4
 		self.win_value=2048	  #2048 to win
 		self.score=0		  #init score=0
-		self.highscore		  #The history highest
+		self.highscore=0		  #The history highest
 		self.reset()		  #reset gamefield(all settings),call a function defined later
 
 	def draw(self,screen):
@@ -90,8 +89,8 @@ class GameField(object): #where did screen, direction comes from
 			separator =defaultdict(lambda:line) # what does defaultdict do
 			if not hasattr(draw_hor_separator,"counter"): # what?
 				draw_hor_separator.counter = 0
-				cast(separator[draw_hor_separator.counter]) 
-				draw_hor_separatorcounter +=1
+			cast(separator[draw_hor_separator.counter]) 
+			draw_hor_separator.counter +=1
 
 		def draw_row(row):# shows how to draw the row, calls later
 			cast(''.join('|{: ^5} '.format(num) if num > 0 else '|      ' for num in row) + '|')# what ??
@@ -115,23 +114,23 @@ class GameField(object): #where did screen, direction comes from
 
 	def spawn(self):   #spawn mean produce a random 2 or 4
 		new_element =4 if randrange(100)>89 else 2 #initial the probability of 2 or 4
-		(i,j)=choice([0 for i in range(self.width)] for j in range(self.height))#i,j emulate a matrix of the game field and use the random choice to fill one space,not filling the space ,just get the coordinate
+		(i,j)=choice([(i,j) for i in range(self.width) for j in range(self.height) if self.field[i][j] ==0])    #i,j emulate a matrix of the game field and use the random choice to fill one space,not filling the space ,just get the coordinate
 		self.field[i][j] = new_element #fill the coordinate
 	
-	def move_is_possible(self,directioin): # this part looks same to the move function
+	def move_is_possible(self,direction): # this part looks same to the move function
 		def row_is_left_moveable(row): #check if numbers can move to the left
 			def change(i):
-				if row[i] ==0 and row[i+1]!=0    #if the number on the left is None and has number on the right
+				if row[i] ==0 and row[i+1]!=0:    #if the number on the left is None and has number on the right
 					return True      #Movable
 				if row[i] !=0 and row[i+1] == row[i]:      #if it has same number tightened
 					return True	#Mergeable
 				return False		#attention here, not using eles:return False(Set False as default)
-			return any(change(i) for i in range(len(row)-1) # if iterable has a True, return True ,All false, return false, this function check if there is at lease one situdation satisfied
+			return any(change(i) for i in range(len(row)-1)) # if iterable has a True, return True ,All false, return false, this function check if there is at lease one situdation satisfied
 		check={}#build a dict for the check of four direction
-		check['Left'] =lambda field:any(row_is_left_movable(row) for row in field)
+		check['Left'] =lambda field:any(row_is_left_moveable(row) for row in field)
 		check['Right']=lambda field: check['Left'](invert(field))
 		check['Up'] =lambda field: check['Left'](transpose(field))
-		check['Down'] =lambda field check['Right'](transpose(field))
+		check['Down'] =lambda field:check['Right'](transpose(field))
 
 		if direction in check: #if the direction has a match value in check
 			return check[direction](self.field)  #why has ( )
@@ -160,8 +159,6 @@ class GameField(object): #where did screen, direction comes from
 							new_row.append(0) #e.g.[2,2,0,0]=>[4,0,0,0], a 0 should be append???????how do they solve [4,4,2,2]?
 						else:
 							new_row.append(0)
-						else:
-							new_row.append(0) #???????
 				assert len(new_row) == len(row)# ???????????
 				return new_row
 			#So here, we need to tighten them first and merge them then tighten again
@@ -181,10 +178,10 @@ class GameField(object): #where did screen, direction comes from
 				else:
 					return False #You cannot move, what will hapen?~~
 		
-		def is_win(self):
+	def is_win(self):
 			return any(any(i >= self.win_value for i in row) for row in self.field)# check any numbers in the field >= 2048
 
-		def is_gameover(self):
+	def is_gameover(self):
 			return not any(self.move_is_possible(move) for move in actions) #when is_win is false and cannot move, gameover
 
 
@@ -198,7 +195,7 @@ class GameField(object): #where did screen, direction comes from
 
 
 	def reset(self):  #this function mention in __init__ for reset the game,not restart
-		if self.socre > self.highscore:  #assert if the current score higher than record
+		if self.score > self.highscore:  #assert if the current score higher than record
 			self.highscore=self.socre  #reset the highscore 
 		self.score=0 #reset status
 		self.field=[[0 for i in range(self.width)] for j in range(self.height)] #reset the game field to clear
@@ -210,3 +207,4 @@ class GameField(object): #where did screen, direction comes from
 	
 
 
+curses.wrapper(main) # Wrap as curses
