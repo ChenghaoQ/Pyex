@@ -15,9 +15,10 @@ def makeMyOpener(head = {
         elem = (key, value)
         header.append(elem)
     opener.addheaders = header
+    print(cj)
     return opener
  
 oper = makeMyOpener()
 uop = oper.open('http://www.baidu.com/', timeout = 1000)
 data = uop.read()
-print(data.decode())
+#print(data.decode())
