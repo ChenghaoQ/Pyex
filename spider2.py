@@ -110,6 +110,7 @@ class HtmlOutputer(object):
 class SpiderMain():
     def craw(self, root_url, page_counts):
         count = 1   #记录爬取的是第几个URL
+
         UrlManager.add_new_url(root_url)
         while UrlManager.has_new_url():    # 如果有待爬取的URL
             try:

@@ -1,3 +1,4 @@
+# coding:utf8
 from bs4 import BeautifulSoup
 import re
 import urlparse 
@@ -71,6 +72,7 @@ class HtmlParser(object):
 		for link in links:
 			new_url = link['href']
 			new_full_url = urlparse.urljoin(page_url,new_url)
+			new_urls.append(new_full_url)
 		return	new_urls
 
 
@@ -94,16 +96,15 @@ class HtmlParser(object):
 
 		return res_data
 	
-	def parse(self, page_url, html_cont):
-		if page_url is None or html_cont is None:
-			return
-		
-		soup = BeautifulSoup(html_cont, 'html.parser', from_encoding= 'utf-8')
-		new_urls = self._get_new_urls(page_url, soup)
-		new_data = self._get_new_data(page_url, soup)
+	def parse(self,page_url,html_cont):
+        	if page_url is None or html_cont is None:
+            		return
+        	soup = BeautifulSoup(html_cont, "html.parser", from_encoding="utf-8")
+        	new_urls = self._get_new_urls(page_url, soup)
+        	new_data = self._get_new_data(page_url, soup)
+        	return new_urls, new_data
 
 
-import urllib2
 
 class HtmlDownloader(object):
 	def download(self,url):
@@ -138,7 +139,7 @@ class HtmlOutputer(object):
 		for data in self.datas:
 
 			fout.write("<tr>")
-			fout.write("<td>%s</td>" % data['url'])
+			fout.write("<td>%s</td>" % data['url'].encode('utf-8'))
 			fout.write("<td>%s</td>" % data['title'].encode('utf-8'))
 			fout.write("<td>%s</td>" % data['summary'].encode('utf-8'))
 
@@ -153,5 +154,4 @@ if __name__ == "__main__":
 	root_url = "http://baike.baidu.com/view/21087.htm" 
 	obj_spider = SpiderMain()
 	obj_spider.craw(root_url)
-
 
