@@ -11,13 +11,13 @@ def main(stdscr):   #stdscr is in curses library
 		game_field.reset() # using game_field not GameField because there is a statement below
 		return 'Game'	#can we use dictionary like this? why>
 	
-	def not_game(): #Not game status is for gameover or win after game
+	def not_game(state): #Not game status is for gameover or win after game
 		game_field.draw(stdscr)   #other than self, there is another variable in it
 		action = get_user_action(stdscr)#where is this
-		responses = defaultdict(lambda:state) #default is current status, no action will keep the current status
+		response = defaultdict(lambda:state) #default is current status, no action will keep the current status
 		response['Restart'],response['Exit'] ='Init','Exit' # Restart need to  init again, exit just exit
 		
-		return responses[action]#Return the users respones
+		return response[action]#Return the users respones
 	def game():
 		game_field.draw(stdscr) # draw the current field status
 		action=get_user_action(stdscr)#get useer action
@@ -196,7 +196,7 @@ class GameField(object): #where did screen, direction comes from
 
 	def reset(self):  #this function mention in __init__ for reset the game,not restart
 		if self.score > self.highscore:  #assert if the current score higher than record
-			self.highscore=self.socre  #reset the highscore 
+			self.highscore=self.score  #reset the highscore 
 		self.score=0 #reset status
 		self.field=[[0 for i in range(self.width)] for j in range(self.height)] #reset the game field to clear
 		self.spawn()
