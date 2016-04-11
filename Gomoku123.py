@@ -59,7 +59,26 @@ class GameBoard(object):
 	def spawn(self):
 		piece=self.blackp if self.counter%2==1 else self.whitep
 		
-			
+	def Judge(self):
+		directions=[[(1,1),(-1,-1)],[(0,1),(0,-1)],[(1,0),(-1,0)],[(-1,1),(1,-1)]]
+		for lines in directions:
+			counter=0
+			for eachway in lines:
+				xd,yd = eachway
+				for n in range(1,5):
+					# if board[x][y] = board[x+xd*n][y+yd*n] else break doesn't work: break is statement not condition expression
+					if board[x][y] = board[x+xd*n][y+yd*n]:
+                                                counter+=1
+                                        else:
+                                                break 
+                                        if counter ==5:
+                                                return True
+                                        else:
+						False
+					#return True if counter ==5 else False is not using properly here: return before assert
+						
+ 
+						
 	def is_win(self):
 		
 	def reset(self);
