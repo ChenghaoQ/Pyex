@@ -208,3 +208,8 @@ class GameField(object): #where did screen, direction comes from
 
 
 curses.wrapper(main) # Wrap as curses
+
+
+#License
+
+#本作品在 GFDL1.2 协议下授权使用,ekCit作品
