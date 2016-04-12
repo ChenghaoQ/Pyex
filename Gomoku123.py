@@ -8,37 +8,56 @@ action_dict=dict(zip(letter_code,action*2))
 
 def main(stdscr):
 	def init():
-	game_board.reset()
-		return 'Game'
+		game_board.reset()
+			return 'Game'
 
 	def not_game(state):
-		
+		game_board.draw(stdscr)	
 		action =get_user_action(stdscr)
-				
+		response = defaultdict(lambda:state)
 	def game();
-
+		game_board.draw(stdscr)
 		action = get_user_action(stdscr)
-	
+		if action == 'Restart':
+			return 'Init'
+		if action =='Exit':
+			return 'Exit'
+	state_actions = {'Init':init,  #put state into a dictionary
+		#	'Win':lambda:not_game('Win'),
+		#	'Gameover':lambda:not_game('Gameover'),
+			'Game':game
+		}
 
+
+	curses.use.default_colors()
+	game_board=GameBoard()
+	state='Init'
+
+	while state != 'Exit':
+		state = state_actions[state]()
+
+def get_user_action(keyboard):
+	char = 'N'
+	while char not in action_dict:
+		char= keboard.getchar()
+	return action_dict[char]
 
 
 class GameBoard(object):
 	
-	def __init__(self,width=16,height=16,blackp='X',whitep='O',counter=0):
-		self.width=width
-		self.height=height
+	def __init__(self,hor,ver,blackp='X',whitep='O',counter=0):
+		self.hor=hor
+		self.ver=ver
 		self.blackp=blackp
 		self.whitep=whitep
 		self.counter=counter
 	def boardinit(self):
 		board=[['+' for row in range(17)]for col in range(17)]
 		def setboarder(self):
-			for hor in range(16):
-				board[0][hor]='--'
-				board[16][hor]=='--'
-			for side in range(16):
-				board[side][0] == '|'
-				board[side][16] == '|'
+			for hor in range(17):
+				board[0][hor]= board[16][hor]='--'
+			for side in range(17):
+				board[side][0]=board[side][16] = '|'
 			return board
 		board = setboarder(board)
 	
@@ -50,14 +69,22 @@ class GameBoard(object):
 			screen.addstr(string+'\n')
 
 		def draw_board(board):
-			cast(board[row] for row in range(16))
+			cast(' ',join(board[row]) for row in range(18))
 
 		screen.clear()
+		
 		#maybe can cast the counter here
-	def move_is_possible(self):
+#	def move_is_possible(self):
 		#check if player can spawn the piece on the board
+	def move(self,direction):
+		def init_cursor(i,j):
+			tmp=board[i][j]
+			board[i][j]='*'
+			#if the cursor moved, temp back to the board
+			
 	def spawn(self):
 		piece=self.blackp if self.counter%2==1 else self.whitep
+		board[self.hor][self.ver]=piece
 		
 	def Judge(self):
 		directions=[[(1,1),(-1,-1)],[(0,1),(0,-1)],[(1,0),(-1,0)],[(-1,1),(1,-1)]]
@@ -71,7 +98,7 @@ class GameBoard(object):
                                                 counter+=1
                                         else:
                                                 break 
-                                        if counter ==5:
+                                        if counter ==4:
                                                 return True
                                         else:
 						False
