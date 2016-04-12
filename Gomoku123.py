@@ -51,15 +51,17 @@ class GameBoard(object):
 		self.blackp=blackp
 		self.whitep=whitep
 		self.counter=counter
+		self.board=[]
+		self.reset()
 	def boardinit(self):
-		board=[['+' for row in range(17)]for col in range(17)]
+		self.board=[['+' for row in range(17)]for col in range(17)]
 		def setboarder(self):
 			for hor in range(17):
 				board[0][hor]= board[16][hor]='--'
 			for side in range(17):
 				board[side][0]=board[side][16] = '|'
 			return board
-		board = setboarder(board)
+		self.board = setboarder(board)
 	
 	def draw(self,screen):
 		player1='	White'
@@ -69,7 +71,7 @@ class GameBoard(object):
 			screen.addstr(string+'\n')
 
 		def draw_board(board):
-			cast(' ',join(board[row]) for row in range(18))
+			cast(' ',join(self,board[row]) for row in range(18))
 
 		screen.clear()
 		
@@ -80,8 +82,27 @@ class GameBoard(object):
 		def init_cursor(i,j):
 			tmp=board[i][j]
 			board[i][j]='*'
+		def move_cursor(direction,moves):#self, direction
+			board[i][j]=tmp
+			#down=i+1
+			#up=i-1
+			#left=j-1
+			#right=j+1
+			board[i][j]='*'
 			#if the cursor moved, temp back to the board
-			
+		moves={}
+		moves['Left'] = lambda j: j-1
+		moves['Right'] = lambda j: j+1
+		moves['Up'] = lambda i : i-1
+		moves['Down'] = lambda i: i+1
+
+		if direction in moves:   # mark down
+			if #self.move_is_possible(direction):
+				self.board[i][j]=moves[direction]
+				self.spawn()
+				return True
+			else:
+				return False
 	def spawn(self):
 		piece=self.blackp if self.counter%2==1 else self.whitep
 		board[self.hor][self.ver]=piece
@@ -109,4 +130,5 @@ class GameBoard(object):
 	def is_win(self):
 		
 	def reset(self);
-		 					
+		self.board=
+			 					
