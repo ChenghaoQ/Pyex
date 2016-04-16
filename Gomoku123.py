@@ -51,17 +51,14 @@ class GameBoard(object):
 		self.blackp=blackp
 		self.whitep=whitep
 		self.counter=counter
-		self.board=[]
 		self.reset()
 	def boardinit(self):
-		self.board=[['+' for row in range(17)]for col in range(17)]
-		def setboarder(self):
-			for hor in range(17):
-				board[0][hor]= board[16][hor]='--'
-			for side in range(17):
-				board[side][0]=board[side][16] = '|'
-			return board
-		self.board = setboarder(board)
+		board=[['+' for row in range(17)]for col in range(17)]
+		for hor in range(17):
+			board[0][hor]= board[16][hor]='--'
+		for side in range(17):
+			board[side][0]=board[side][16] = '|'
+		self.board = board
 	
 	def draw(self,screen):
 		player1='	White'
