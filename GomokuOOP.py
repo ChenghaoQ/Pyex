@@ -1,5 +1,6 @@
 action=['Up','Left','Down','Right','Restart','Exit']
-letter_code=[ord(ch) for ch in 'WASDRQwasdrq'] 
+#letter_code=[ord(ch) for ch in 'WASDRQwasdrq'] 
+letter_code='WASDEQwasdrq'
 action_dict=dict(zip(letter_code,action*2))
 
 
@@ -8,6 +9,8 @@ def main():
 	game_board=GameBoard()	
 	def init():
 		game_board.reset()
+#		initcursor=game_board.move()
+#		initcursor.init_cursor()
 		return 'Game'
 	def not_game(state):
 		game_board.draw()
@@ -23,14 +26,15 @@ def main():
 			return 'Init'
 		elif action == 'Exit':
 			return 'Exit'
-		if game_field.move(action):
-			if game_field.Judge():
+		if game_board.move(action):
+			if game_board.Judge():
 				return 'Win'
+		
 		return 'Game'
-		game_board.move()
+	
 	state='Init'
 	state_actions={'Init':init,
-			'Win':lambda:not_game('Win')
+			'Win':lambda:not_game('Win'),
 			'Game':game}
 	
 	while state !='Exit':
@@ -46,8 +50,8 @@ def get_user_action():
 
 class GameBoard(object):
 	def __init__(self,blackp='X',whitep='O'):
-		self.hor =1 
-		self.ver =1
+		self.hor =8 
+		self.ver =8
 		self.blackp=blackp
 		self.whitep=whitep
 		self.board=None
@@ -81,7 +85,7 @@ class GameBoard(object):
 			self.board[self.hor][self.ver]= '@'
 			return i,j,tmp
 	
-		def movement(direction):
+		def move_cursor(direction):
 			if direction == 'Left':
 				self.ver-=1
 			elif direction == 'Right':
@@ -119,7 +123,7 @@ class GameBoard(object):
 		return False
 
 	def reset(self):
-		boardinit()
+		self.boardinit()
 		
 
 
