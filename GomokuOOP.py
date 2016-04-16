@@ -1,8 +1,9 @@
-action=['Up','Left','Down','Right','Restart','Exit']
+import os
+action=['Up','Left','Down','Right','Spawn','Restart','Exit']
 #letter_code=[ord(ch) for ch in 'WASDRQwasdrq'] 
-letter_code='WASDEQwasdrq'
+letter_code='WASDGEQwasdgrq'
 action_dict=dict(zip(letter_code,action*2))
-
+i,j,tmp=0,0,'+'# move section backup value initial
 
 def main():
 	
@@ -26,10 +27,21 @@ def main():
 			return 'Init'
 		elif action == 'Exit':
 			return 'Exit'
-		if game_board.move(action):
-			if game_board.Judge():
-				return 'Win'
-		
+#		while True:
+#			if action != 'Spawn':
+		try:
+			if game_board.move(action):
+				if game_board.Judge():
+					return 'Win'
+		except:
+			print("Out of range right now,Try again please")
+			action =get_user_action()
+			if game_board.move(action):
+				if game_board.Judge():
+					return 'Win'
+#			else:
+#				game_board.spawn()
+#				break
 		return 'Game'
 	
 	state='Init'
@@ -54,7 +66,7 @@ class GameBoard(object):
 		self.ver =8
 		self.blackp=blackp
 		self.whitep=whitep
-		self.board=None
+		self.tmp=None
 	def boardinit(self):
 		board=[['+' for row in range(17)]for col in range(17)]
 		#set boarder
@@ -71,18 +83,16 @@ class GameBoard(object):
 	#	def draw_board(row):
 	#		print (' '.join(self.board[row]))
 
-		#os.system('clear')
+		os.system('clear')
 		for row in range(17):
 	#		draw_board(row)
 			print (' '.join(self.board[row]))
 	def move(self,direction):
-		i,j=0,0
-		tmp=None
+		global i,j,tmp
 		#Move cursor
 		def init_cursor(i,j,tmp):
 			i,j=self.hor,self.ver   #record position
 			tmp=self.board[self.hor][self.ver] #record content
-			self.board[self.hor][self.ver]= '@'
 			return i,j,tmp
 	
 		def move_cursor(direction):
@@ -94,13 +104,14 @@ class GameBoard(object):
 				self.hor -=1
 			elif direction == 'Down':
 				self.hor += 1
+		def put_cursor():
+			self.board[self.hor][self.ver]='@'
 		def backup_cursor(i,j,tmp):
 			self.board[i][j]=tmp
-		i,j,tmp=init_cursor(i,j,tmp)
 		move_cursor(direction)
-		self.board[self.hor][self.ver]='@'
 		backup_cursor(i,j,tmp)
-		
+		i,j,tmp=init_cursor(i,j,tmp)
+		put_cursor()
 		
 	def spawn(self):
 		piece = self.balcp if self.counter%2 ==1 else self.whitep
