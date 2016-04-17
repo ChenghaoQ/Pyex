@@ -4,7 +4,7 @@ action=['Up','Left','Down','Right','Spawn','Restart','Exit']
 letter_code='WASDGEQwasdgrq'
 action_dict=dict(zip(letter_code,action*2))
 #letter_code=[ord(ch) for ch in 'WASDRQwasdrq'] 
-i,j,tmp=0,0,'+'# move section backup value initial
+#i,j,tmp=0,0,'+'# move section backup value initial
 
 def main():
 	
@@ -58,17 +58,18 @@ def get_user_action():
 	#print("Move cursor please: ",end='')
 	char = input("Move cursor please: ")
 	while char not in action_dict:
-		char=input("Wrong direction, again please")
+		char=input("Wrong direction, again please: ")
 	return action_dict[char]
 
 
 class GameBoard(object):
 	def __init__(self,blackp='X',whitep='O',counter=0):
-		self.hor =8 
-		self.ver =8
+		self.i=self.hor =8 
+		self.j=self.ver =8
 		self.blackp=blackp
 		self.whitep=whitep
 		self.counter=counter
+		self.tmp='+'
 	def boardinit(self):
 		board=[['+' for row in range(17)]for col in range(17)]
 		#set boarder
@@ -99,7 +100,7 @@ class GameBoard(object):
 		draw_status()
 
 	def move(self,direction):
-		global i,j,tmp
+		#global i,j,tmp
 		#Move cursor
 		def init_cursor(i,j,tmp):
 			i,j=self.hor,self.ver   #record position
@@ -120,17 +121,18 @@ class GameBoard(object):
 		def backup_cursor(i,j,tmp):
 			self.board[i][j]=tmp
 		move_cursor(direction)
-		backup_cursor(i,j,tmp)
-		i,j,tmp=init_cursor(i,j,tmp)
+		backup_cursor(self.i,self.j,self.tmp)
+		self.i,self.j,self.tmp=init_cursor(self.i,self.j,self.tmp)
 		put_cursor()
 		
 	def spawn(self,action):
 		piece = self.blackp if self.counter%2 ==1 else self.whitep
-		def spawn_piece(action):
+		def spawn_piece(action,piece):
 			if action == 'Spawn':
 				self.board[self.hor][self.ver] = piece
 				self.counter +=1
-		spawn_piece(action)
+				self.tmp=piece
+		spawn_piece(action,piece)
 	def Judge(self):
 		directions=[[(1,1),(-1,-1)],[(0,1),(0,-1)],[(1,0),(-1,0)],[(-1,1),(1,-1)]]
 		for lines in directions:
