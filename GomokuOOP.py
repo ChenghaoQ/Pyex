@@ -1,8 +1,9 @@
 import os
+#import curses
 action=['Up','Left','Down','Right','Spawn','Restart','Exit']
-#letter_code=[ord(ch) for ch in 'WASDRQwasdrq'] 
 letter_code='WASDGEQwasdgrq'
 action_dict=dict(zip(letter_code,action*2))
+#letter_code=[ord(ch) for ch in 'WASDRQwasdrq'] 
 i,j,tmp=0,0,'+'# move section backup value initial
 
 def main():
@@ -27,21 +28,21 @@ def main():
 			return 'Init'
 		elif action == 'Exit':
 			return 'Exit'
-#		while True:
-#			if action != 'Spawn':
-		try:
-			if game_board.move(action):
-				if game_board.Judge():
-					return 'Win'
-		except:
-			print("Out of range right now,Try again please")
-			action =get_user_action()
-			if game_board.move(action):
-				if game_board.Judge():
-					return 'Win'
-#			else:
-#				game_board.spawn()
-#				break
+#		
+		if action != 'Spawn':
+			try:
+				if game_board.move(action):
+					if game_board.Judge():
+						return 'Win'
+			except:
+				print("Out of range right now,Try again please")
+				action =get_user_action()
+				if game_board.move(action):
+					if game_board.Judge():
+						return 'Win'
+		else:
+			game_board.spawn(action)
+#			break
 		return 'Game'
 	
 	state='Init'
@@ -54,19 +55,20 @@ def main():
 
 
 def get_user_action():
-	char=input("Move cursor please: ")
+	#print("Move cursor please: ",end='')
+	char = input("Move cursor please: ")
 	while char not in action_dict:
 		char=input("Wrong direction, again please")
 	return action_dict[char]
 
 
 class GameBoard(object):
-	def __init__(self,blackp='X',whitep='O'):
+	def __init__(self,blackp='X',whitep='O',counter=0):
 		self.hor =8 
 		self.ver =8
 		self.blackp=blackp
 		self.whitep=whitep
-		self.tmp=None
+		self.counter=counter
 	def boardinit(self):
 		board=[['+' for row in range(17)]for col in range(17)]
 		#set boarder
@@ -77,16 +79,25 @@ class GameBoard(object):
 		self.board = board
 
 	def draw(self):
-		player1='	White'
-		player2='	Black'
+		player1='* * * * * * 白方下棋 * * * * * *'
+		player2='* * * * * * 黑方下棋 * * * * * *'
+		help_string='(W)光标向上(S)光标向下(A)光标向左(D)光标向右'
+		help_string2= '(G)下子(R)重新开始(Q)退出游戏'
+		def draw_board(row):
+			print (' '.join(self.board[row]))
+		def draw_status():
+			if self.counter%2 == 0:
+				print(player2)
+			else:
+				print(player1)
 
-	#	def draw_board(row):
-	#		print (' '.join(self.board[row]))
-
+			print("当前步数:   %d"%self.counter)
+			print(help_string,'\n',help_string2)
 		os.system('clear')
 		for row in range(17):
-	#		draw_board(row)
-			print (' '.join(self.board[row]))
+			draw_board(row)
+		draw_status()
+
 	def move(self,direction):
 		global i,j,tmp
 		#Move cursor
@@ -113,11 +124,13 @@ class GameBoard(object):
 		i,j,tmp=init_cursor(i,j,tmp)
 		put_cursor()
 		
-	def spawn(self):
-		piece = self.balcp if self.counter%2 ==1 else self.whitep
-		board[self.hor][self.ver] = piece
-		self.counter +=1
-
+	def spawn(self,action):
+		piece = self.blackp if self.counter%2 ==1 else self.whitep
+		def spawn_piece(action):
+			if action == 'Spawn':
+				self.board[self.hor][self.ver] = piece
+				self.counter +=1
+		spawn_piece(action)
 	def Judge(self):
 		directions=[[(1,1),(-1,-1)],[(0,1),(0,-1)],[(1,0),(-1,0)],[(-1,1),(1,-1)]]
 		for lines in directions:
