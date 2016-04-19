@@ -1,67 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import os
-#import curses
-action=['Up','Left','Down','Right','Spawn','Restart','Exit']
-letter_code='WASDGEQwasdgrq'
-action_dict=dict(zip(letter_code,action*2))
-#letter_code=[ord(ch) for ch in 'WASDRQwasdrq'] 
-#i,j,tmp=0,0,'+'# move section backup value initial
-
-def main():
-	
-	game_board=GameBoard()	
-	def init():
-		game_board.reset()
-#		initcursor=game_board.move()
-#		initcursor.init_cursor()
-		return 'Game'
-	def not_game(state):
-		game_board.draw()
-		action = get_user_action
-		response=defaultdict(lambda:state)
-		response['Restart']
-		
-	def game():
-
-		game_board.draw()
-		action =get_user_action()
-		if action =='Init':
-			return 'Init'
-		elif action == 'Exit':
-			return 'Exit'
-#		
-		if action != 'Spawn':
-			try:
-				if game_board.move(action):
-					if game_board.Judge():
-						return 'Win'
-			except:
-				print("Out of range right now,Try again please")
-				action =get_user_action()
-				if game_board.move(action):
-					if game_board.Judge():
-						return 'Win'
-		else:
-			game_board.spawn(action)
-#			break
-		return 'Game'
-	
-	state='Init'
-	state_actions={'Init':init,
-			'Win':lambda:not_game('Win'),
-			'Game':game}
-	
-	while state !='Exit':
-		state = state_actions[state]()
-
-
-def get_user_action():
-	#print("Move cursor please: ",end='')
-	char = input("Move cursor please: ")
-	while char not in action_dict:
-		char=input("Wrong direction, again please: ")
-	return action_dict[char]
-
-
 class GameBoard(object):
 	def __init__(self,blackp='X',whitep='O',counter=0):
 		self.i=self.hor =8 
@@ -94,7 +33,10 @@ class GameBoard(object):
 
 			print("当前步数:   %d"%self.counter)
 			print(help_string,'\n',help_string2)
-		os.system('clear')
+		try:
+			os.system('clear')
+		except SystemError:
+			os.system('cls')
 		for row in range(17):
 			draw_board(row)
 		draw_status()
@@ -150,36 +92,3 @@ class GameBoard(object):
 
 	def reset(self):
 		self.boardinit()
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-main()
