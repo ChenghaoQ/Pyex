@@ -18,7 +18,7 @@ def main():
 				break
 			else:
 				print("对不起，此处已有棋子，请重新输入！")
-		if Checkifwin(playboard,row,col,counter) == True:
+		if Checkifwin(playboard,row,col) == True:
 			print("\n\n\n\白方胜！！\n\n\n")
 			break
 		print("* * * * 黑棋，棋子为'X'* * * * ")
@@ -26,14 +26,14 @@ def main():
 			row=int(input("请输入横行坐标："))
 			col=int(input("请输入竖行坐标："))
 			row-=1;col-=1;
-			if checkoccupation(playboard,row,col)==True:
-				movepiece(playboard,row,col,counter)
+			if checkoccupation(playboard,row,col,counter)==True:
+				movepiece(playboard,row,col)
 				printBoard(playboard)
 				counter+=1
 				break
 			else:
 				print("对不起，此处已有棋子，请重新输入！")
-		if Checkifwin(playboard,row,col,counter) == True:
+		if Checkifwin(playboard,row,col) == True:
 			print("\n\n\n\黑方胜！！\n\n\n")
 			break
 	
@@ -50,33 +50,20 @@ def printBoard(board):
 	print("\n")
 	for i in range(15):
 		print("%d"%(i+1)+' '+' '.join(board[i]) if i+1>=10  else "%d"%(i+1)+'  '+' '.join(board[i]))
-def Checkifwin(board,row,col,times):
-	if times%2==0:
-		piece='O'
-	else:
-		piece='X'
-	a=0;b=0;c=0;d=0;i=0;j=0;
-	direc=[[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]]
-	for i in range(8):
-		for j in range(4):
-			if board[row+direc[i][0]][col+direc[i][1]]==board[row][col]:
-				if direc[i][0]==0:
-					a+=1
-				elif direc[i][1]==0:
-					b+=1
-				#Unsure with the line below
-				elif direc[i][0] == direc[i][1]:
-					c+=1
+def Checkifwin(playboard,row,col):
+	directions=[[(1,1),(-1,-1)],[(0,1),(0,-1)],[(1,0),(-1,0)],[(-1,1),(1,-1)]]
+	for lines in directions:
+		counter=0
+		for eachway in lines:
+			xd,yd =eachway
+			for n in range(1,5):
+				if playboard[row][col] == playboard[row + xd*n][col + xd*n]:
+					counter +=1
 				else:
-					d+=1
-				row+=direc[i][0]
-				col+=direc[i][1]
-			else:
-				break
-	if a==4 or b==4 or c==4 or d==4:
-		return True
-	else:
-		return False
+						break
+				if counter == 4:
+					return True
+	return False
 def movepiece(board,row,col,times):
 	if times%2==0:
 		piece='O'
