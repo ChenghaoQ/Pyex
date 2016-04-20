@@ -82,7 +82,7 @@ class GameBoard(object):
 			for eachway in lines:
 				xd,yd =eachway
 				for n in range(1,5):
-					if self.board[self.hor][self.ver] == self.board[self.hor + xd*n][self.ver + xd*n]:
+					if self.board[self.hor][self.ver] == self.board[self.hor + xd*n][self.ver + yd*n]:
 						counter +=1
 					else:
 						break

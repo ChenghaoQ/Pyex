@@ -26,8 +26,8 @@ def main():
 			row=int(input("请输入横行坐标："))
 			col=int(input("请输入竖行坐标："))
 			row-=1;col-=1;
-			if checkoccupation(playboard,row,col,counter)==True:
-				movepiece(playboard,row,col)
+			if checkoccupation(playboard,row,col)==True:
+				movepiece(playboard,row,col,counter)
 				printBoard(playboard)
 				counter+=1
 				break
@@ -57,7 +57,7 @@ def Checkifwin(playboard,row,col):
 		for eachway in lines:
 			xd,yd =eachway
 			for n in range(1,5):
-				if playboard[row][col] == playboard[row + xd*n][col + xd*n]:
+				if playboard[row][col] == playboard[row + xd*n][col + yd*n]:
 					counter +=1
 				else:
 						break

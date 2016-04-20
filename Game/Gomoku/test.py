@@ -1,8 +1,8 @@
 
-board=[['0' for row in range(10)] for col in range(10)]
+board=[['+' for row in range(10)] for col in range(10)]
 def change(board,row,col):
 	playboard=board[:]
-	directions=[[(0,1),(0,-1)],[(1,0),(-1,0)],[(-1,1),(1,-1)]]
+	directions=[[(1,1),(-1,-1)],[(0,1),(0,-1)],[(1,0),(-1,0)],[(-1,1),(1,-1)]]
 	for lines in directions:
 		print("redo at line",lines)
 		for eachway in lines:
@@ -10,10 +10,10 @@ def change(board,row,col):
 			xd,yd =eachway
 			for n in range(1,5):
 				
-				playboard[row + xd*n][col + xd*n] = playboard[row][col]
+				playboard[row + xd*n][col + yd*n] = playboard[row][col]
 
 				for each in range(10):
-					print(playboard[each])
+					print(' '.join(playboard[each]))
 
 				print('\n')						
 #for each in range(10):
