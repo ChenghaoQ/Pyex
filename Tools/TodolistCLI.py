@@ -9,7 +9,7 @@ def main():
 	todo=TODO()
 	
 	def init():
-		todo.reset()
+		todo.reset(reset)
 	def todo():
 		todo.draw()
 		action = get_user_action()
@@ -89,8 +89,6 @@ class TODO(object):
 			self.todolist[self.counter][0]=self.status[2]
 		def remove_task():
 			del self.todolist[self.counter]
-		def clear_list():
-			del self.todolist[:]
 		def execution(action):
 			if action ==  'New':
 				new_todo()
@@ -112,7 +110,14 @@ class TODO(object):
 
 		draw_title()
 		draw_list()
+	def reset(passwd):
+		if passwd== 'Reset':
+			del self.todolist[:]
+			for n in range(5):
+				self.todolist.append((self.status[0],'________________________','%25s'%'[   ]'))
+			self.tmp='[   ]'
 
+	
 #task should be looks like ☐ todo ☑ completed ☒ postponed  ☐ ☑ ☒
 # t
 main()
