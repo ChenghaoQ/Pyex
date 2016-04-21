@@ -1,24 +1,21 @@
 
-action=['Up','Down','Complete','New','Postpone','Remove','Clear','Save','Quit']
+action=['Up','Down','Complete','New','Postpone','Remove','Save','Quit']
 letter_code="WSKJLRCwskjlrc"
-action_dict=dict(zip(action,letter_code))
+action_dict=dict(zip(letter_code*2,action*2))
 moves=set(['Up','Down'])
 
 def main():
 	
 	todo=TODO()
 	
-#	def init():
-#		todo.reset(reset)
+	def init():
+		todo.reset(reset)
 	def GoToDo():
 		todo.draw()
 		action = get_user_action()
 
 		if action in moves:
-                        todo.move(action)
-                                			
-
-
+			todo.move(action)
 		else:
 			todo.operation(action)
 
@@ -44,9 +41,10 @@ def get_user_input():
 
 
 def get_user_action():
-	char=input("please enter an action: ")
+	char='N'
+	char=raw_input("please enter an action: ")
 	while char not in letter_code:
-		char =input("please enter an action: ")
+		char =raw_input("please enter an action: ")
 	return action_dict[char]
 
 
@@ -83,7 +81,7 @@ class TODO(object):
 			self.todolist.append((self.status[0],self.task_jar[self.counter],'[   ]'))
 			self.counter+=1
 		def complete_todo():
-			self.todolist[seiself.counter][0]=self.status[1]
+			self.todolist[self.counter][0]=self.status[1]
 		def postpone_todo():
 			self.todolist[self.counter][0]=self.status[2]
 		def remove_task():
