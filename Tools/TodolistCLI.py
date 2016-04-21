@@ -2,29 +2,28 @@
 action=['Up','Down','Complete','New','Postpone','Remove','Clear','Save','Quit']
 letter_code="WSKJLRCwskjlrc"
 action_dict=dict(zip(action,letter_code))
-moves=set('Up','Down')
+moves=set(['Up','Down'])
 
 def main():
 	
 	todo=TODO()
 	
-	def init():
-		todo.reset(reset)
-	def todo():
+#	def init():
+#		todo.reset(reset)
+	def GoToDo():
 		todo.draw()
 		action = get_user_action()
 
 		if action in moves:
-			
+                        todo.move(action)
+                                			
 
 
 		else:
 			todo.operation(action)
 
 		return 'LIST'
-
-
-
+        GoToDo()
 
 
 
@@ -67,7 +66,7 @@ class TODO(object):
 		def move_cursor(direction):
 			if direction == 'Up':
 				self.counter -= 1
-			elif direction= 'Down':
+			elif direction== 'Down':
 				self.counter += 1
 		def put_cursor(counter):
 			self.todolist[counter][2]='[ * ]'
@@ -81,7 +80,7 @@ class TODO(object):
 	def operation(self,action):
 		def new_todo():
 			self.task_jar.append(get_user_action())
-			self.todolist.append((self.status[0],self.task_jar[counter],'%25s'%'[   ]'):
+			self.todolist.append((self.status[0],self.task_jar[self.counter],'[   ]'))
 			self.counter+=1
 		def complete_todo():
 			self.todolist[seiself.counter][0]=self.status[1]
@@ -114,7 +113,7 @@ class TODO(object):
 		if passwd== 'Reset':
 			del self.todolist[:]
 			for n in range(5):
-				self.todolist.append((self.status[0],'________________________','%25s'%'[   ]'))
+				self.todolist.append((self.status[0],self.blank,'[   ]'))
 			self.tmp='[   ]'
 
 	
