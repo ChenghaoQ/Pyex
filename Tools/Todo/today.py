@@ -1,72 +1,7 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import os
-actions=['Up','Down','Complete','New','Postpone','Remove','Exit']#'Save','Quit']
-letter_code="WSKJLRQwskjlrq"
-action_dict=dict(zip(letter_code,actions*2))
-moves=set(['Up','Down'])
-
-def main():
-	
-	todo=TODO() 
-	def init():
-		todo.reset('Reset')
-		return 'Todo'
-	def not_todo(state):
-		todo.draw()
-		action=get_user_action()
-		response=defaultdict(lambda:state)
-		response['Exit']='Exit'
-	def GoToDo():
-		todo.draw()
-		action = get_user_action()
-
-		if action=='Exit':
-			return 'Exit'
-
-		if action in moves:
-			while True:
-				try:
-					todo.move(action)
-					break
-				except IndexError:
-					action=get_user_action()
-					continue
-		else:
-			todo.operation(action)
-		return 'Todo'
-		
-	state='Init'
-	state_actions={'Init':init,
-					'Win':lambda:not_todo('Win'),
-					'Todo':GoToDo}
-
-
-	while state !='Exit':
-		state=state_actions[state]()
-
-
-        
-
-
-
-
-
-
-
-def get_user_input():
-	task = input("What Are We Gonna TODO today? :")
-	return task
-
-
-
-def get_user_action():
-	char='N'
-	char=input("please enter an action: ")
-
-	while char not in action_dict:
-		char =input("please enter an action again: ")
-	return action_dict[char]
-
-
+import useraction
 
 class TODO(object):
 	
@@ -100,7 +35,7 @@ class TODO(object):
 		put_cursor(self.cursor)
 	def operation(self,action):
 		def new_todo():
-			task=get_user_input()
+			task=useraction.get_user_input()
 			if task =='Reset':
 				return 'Init'
 
@@ -149,8 +84,3 @@ class TODO(object):
 				self.todolist.append([self.status[0],self.blank,'[   ]'])
 			self.tmp='[   ]'
 			self.new=0
-
-	
-#task should be looks like ☐ todo ☑ completed ☒ postponed  ☐ ☑ ☒
-# t
-main()

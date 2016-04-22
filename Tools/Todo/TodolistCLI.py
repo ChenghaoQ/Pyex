@@ -1,4 +1,5 @@
 import os
+import getch
 actions=['Up','Down','Complete','New','Postpone','Remove','Exit']#'Save','Quit']
 letter_code="WSKJLRQwskjlrq"
 action_dict=dict(zip(letter_code,actions*2))
@@ -60,10 +61,11 @@ def get_user_input():
 
 def get_user_action():
 	char='N'
-	char=input("please enter an action: ")
-
+	print("please enter an action: ")
+	char=getch.getch()
 	while char not in action_dict:
-		char =input("please enter an action again: ")
+		print("please enter an action again: ")
+		char=getch.getch()
 	return action_dict[char]
 
 
