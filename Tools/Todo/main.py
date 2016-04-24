@@ -1,10 +1,15 @@
 import useraction
 import today
+import datatrans
 def main():
 	
 	todo=today.TODO() 
 	def init():
-		todo.reset('Reset')
+		try:
+			todo.tmp='[   ]'
+			todo.todolist=datatrans.loadfile()
+		except FileNotFoundError:
+			todo.reset('Reset')
 		return 'Todo'
 	def not_todo(state):
 		todo.draw()
@@ -16,6 +21,7 @@ def main():
 		action = useraction.get_user_action()
 
 		if action=='Exit':
+			datatrans.savefile(todo.todolist)
 			return 'Exit'
 
 		if action in useraction.moves:
