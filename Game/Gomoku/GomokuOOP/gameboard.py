@@ -16,8 +16,9 @@ class GameBoard(object):
 			board[0][hor]=board[16][hor]='-'
 		for side in range(17):
 			board[side][0]=board[side][16] = '|'
+		board[8][8]='@'
 		self.board = board
-
+		
 	def draw(self):
 		player1='* * * * * * 白方下棋 * * * * * *'
 		player2='* * * * * * 黑方下棋 * * * * * *'
@@ -40,7 +41,8 @@ class GameBoard(object):
 		for row in range(17):
 			draw_board(row)
 		draw_status()
-
+		if self.Judge():
+			print("You win!")
 	def move(self,direction):
 		#global i,j,tmp
 		#Move cursor

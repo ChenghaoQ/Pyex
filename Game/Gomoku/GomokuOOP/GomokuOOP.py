@@ -1,6 +1,6 @@
 import gameboard 
 import useraction
-
+from collections import defaultdict 
 
 def main():
 	
@@ -27,17 +27,15 @@ def main():
 #		
 		if action != 'Spawn':
 			try:
-				if game_board.move(action):
-					if game_board.Judge():
-						return 'Win'
+				game_board.move(action)
 			except:
 				print("Out of range right now,Try again please")
 				action =useraction.get_user_action()
-				if game_board.move(action):
-					if game_board.Judge():
-						return 'Win'
+				game_board.move(action)
 		else:
 			game_board.spawn(action)
+			if game_board.Judge():
+				return 'Win'
 #			break
 		return 'Game'
 	
