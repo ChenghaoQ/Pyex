@@ -1,24 +1,32 @@
 import useraction
-import today
+import todolist
 import datatrans
+import draw
+import os
 def main():
 	
-	todo=today.TODO() 
+	today=todolist.TODO('* * * *Today * * * *')
+        future=todolist.TODO('* * * *Future * * * *') 
 	def init():
 		try:
-			todo.tmp='[   ]'
-			todo.todolist=datatrans.loadfile()
+			today.tmp='[   ]'
+			today.todolist=datatrans.loadfile()
 		except FileNotFoundError:
-			todo.reset('Reset')
+			today.reset('Reset')
+                        future.reset('Reset')
 		return 'Todo'
 	def not_todo(state):
-		todo.draw()
+                os.system('clear')
+	        draw.Draw(today,today.name)
+                draw.Draw(future,future.name)	
 		action=useraction.get_user_action()
 		response=defaultdict(lambda:state)
 		response['Exit']='Exit'
 	def GoToDo():
-		todo.draw()
-		action = useraction.get_user_action()
+                os.system('clear')
+	        draw.Draw(today,today.name)
+                draw.Draw(future,future.name)	
+                action = useraction.get_user_action()
 
 		if action=='Exit':
 			datatrans.savefile(todo.todolist)
@@ -34,6 +42,7 @@ def main():
 					continue
 		else:
 			todo.operation(action)
+			
 		return 'Todo'
 		
 	state='Init'

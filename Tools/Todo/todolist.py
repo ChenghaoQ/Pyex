@@ -5,9 +5,8 @@ import useraction
 
 class TODO(object):
 	
-	def __init__(self):
+	def __init__(self,name):
 		self.todolist=[]
-		#self.task_jar=[]
 		self.status=['☐','☑','☒']
 		self.counter=0
 		self.init=5
@@ -15,6 +14,7 @@ class TODO(object):
 		self.i=0
 		self.tmp='[   ]'
 		self.blank='________________________'
+		self.name=name
 	def move(self,direction):
 		def init_cursor(cursor,tmp):
 			tmp=self.todolist[cursor][2]
@@ -65,9 +65,9 @@ class TODO(object):
 				postpone_todo()
 			elif action == 'Remove':
 				remove_task()
-			elif action == 'Clear' :
-				clear_list()
-		execution(action)
+			elif action == 'Help' :
+				pass
+		#execution(action)
 	def draw(self):
 		def draw_title():
 			print("* * * * Welcome to Chenghao's todo list * * * * *")
