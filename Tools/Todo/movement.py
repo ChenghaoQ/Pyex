@@ -16,7 +16,7 @@ class Move(object):
 
 
 
-def movement(action,todolist,cursor,tmp,i):
+def moves(action,todolist,cursor,tmp,i):
 	a=Move(todolist,cursor,tmp,i)
 	a.move_cursor(direction)
 	a.restore_cursor(a.i,a.tmp)

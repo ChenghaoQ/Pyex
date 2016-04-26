@@ -3,7 +3,8 @@ import todolist
 import datatrans
 import draw
 import os
-def main():
+import action
+def your_todolist():
 	
 	today=todolist.TODO('* * * *Today * * * *')
        # future=todolist.TODO('* * * *Future * * * *') 
@@ -15,33 +16,22 @@ def main():
 			today.reset('Reset')
         #                future.reset('Reset')
 		return 'Todo'
-	def not_todo(state):
-                os.system('clear')
-	        draw.Draw(today,today.name)
-                draw.Draw(future,future.name)	
-		action=useraction.get_user_action()
-		response=defaultdict(lambda:state)
-		response['Exit']='Exit'
 	def GoToDo():
                 os.system('clear')
 	        draw.Draw(today,today.name)
-                draw.Draw(future,future.name)	
                 action = useraction.get_user_action()
 
-	#	if action=='Exit':
-	#		datatrans.savefile(todo.todolist)
-	#		return 'Exit'
 
 		if action in useraction.moves:
 			while True:
 				try:
-					todo.move(action)
+					movement.moves(action,today.todolist,today.cursor,today.tmp.today.i)
 					break
 				except IndexError:
 					action=useraction.get_user_action()
 					continue
 		else:
-			todo.operation(action)
+			action.operation(today,action)
 			
 		return 'Todo'
 		
