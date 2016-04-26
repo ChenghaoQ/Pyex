@@ -14,35 +14,31 @@ def your_todolist():
 		except FileNotFoundError:
 			today.reset('Reset')
 #                future.reset('Reset')
-		return 'Todo'
+		opera=operation.Operation(today.todolist,today.cursor,today.status,today.init)
+		return opera
 	def GoToDo():
-		#Draw the list
-		os.system('clear')
-		a=draw.Draw(today.todolist,today.name)
-		a.draw_TODO()
-		action = useraction.get_user_action()
+		while True:
+			#Draw the list
+			os.system('clear')
+			a=draw.Draw(today.todolist,today.name)
+			a.draw_TODO()
+			action = useraction.get_user_action()
+			print(op.counter)
 
-
-		if action in useraction.moves:
-			while True:
-				try:
-					movement.moves(action,today.todolist,today.cursor,today.tmp.today.i)
+			if action in useraction.moves:
+				while True:
+					try:
+						movement.moves(action,today.todolist,today.cursor,today.tmp.today.i)
+						break
+					except IndexError:
+						action=useraction.get_user_action()
+						continue
+			else:
+				if op.execution(action)==0:
 					break
-				except IndexError:
-					action=useraction.get_user_action()
-					continue
-		else:
-			if operation.TODO_operation(today,action)==0:
-				return 'Exit'
+	op=init()
 
-		return 'Todo'
-
-	state='Init'
-	state_actions={'Init':init,
-	'Todo':GoToDo}
-
-
-	while state !='Exit':
-		state=state_actions[state]()
+	GoToDo()
+	
 
 your_todolist()
