@@ -18,8 +18,8 @@ def your_todolist():
 	def GoToDo():
 		#Draw the list
 		os.system('clear')
-		a=draw.Draw(today,today.name)
-		a.draw_TODO
+		a=draw.Draw(today.todolist,today.name)
+		a.draw_TODO()
 		action = useraction.get_user_action()
 
 

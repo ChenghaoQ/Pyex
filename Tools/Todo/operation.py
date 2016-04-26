@@ -1,15 +1,13 @@
 import useraction
 class Operation(object):
-	def __init__(self,todolist,cursor,status,init,counter):
+	def __init__(self,todolist,cursor,status,init):
 		self.todolist=todolist
 		self.cursor=cursor
 		self.status=status
 		self.init=init
-		self.counter=counter
+		self.counter=0
 	def new_todo(self):
 		task=useraction.get_user_input()
-		if task =='Reset':
-			return 'Init'
 
 		if self.counter<5:
 			self.todolist[self.counter]=[self.status[0],task,'[   ]']
@@ -33,7 +31,9 @@ class Operation(object):
 			if other == 'Reset':
 				pass
 			elif other == 'Clear':
-				pass
+				for each in self.todolist:
+					if each[0]==' ':
+						del each
 			elif other == 'Save':
 				pass
 			elif other == 'Load':
