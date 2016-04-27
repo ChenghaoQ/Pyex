@@ -8,9 +8,9 @@ class TODO(object):
 	def __init__(self,name):
 		self.todolist=[]
 		self.status=['☐','☑','☒']
-		self.counter=0
+		self.counter=[0]
 		self.init=5
-		self.cursor=0
+		self.cursor[0]=0
 		self.i=0
 		self.tmp='[   ]'
 		self.blank='________________________'

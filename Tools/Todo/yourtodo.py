@@ -14,7 +14,7 @@ def your_todolist():
 		except FileNotFoundError:
 			today.reset('Reset')
 #                future.reset('Reset')
-		opera=operation.Operation(today.todolist,today.cursor,today.status,today.init)
+		opera=operation.Operation(today.todolist,today.cursor,today.status,today.init,today.counter)
 		return opera
 	def GoToDo():
 		while True:

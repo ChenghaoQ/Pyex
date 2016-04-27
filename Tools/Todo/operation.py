@@ -1,26 +1,26 @@
 import useraction
 class Operation(object):
-	def __init__(self,todolist,cursor,status,init):
+	def __init__(self,todolist,cursor,status,init,counter):
 		self.todolist=todolist
 		self.cursor=cursor
 		self.status=status
 		self.init=init
-		self.counter=0
+		self.counter=counter
 	def new_todo(self):
 		task=useraction.get_user_input()
 
-		if self.counter<5:
-			self.todolist[self.counter]=[self.status[0],task,'[   ]']
+		if self.counter[0]<5:
+			self.todolist[self.counter[0]]=[self.status[0],task,'[   ]']
 		else:
-			self.todolist.append([self.status[0],self.task_jar[self.counter],'[   ]'])
-			self.counter+=1
+			self.todolist.append([self.status[0],task,'[   ]'])
+		self.counter[0]+=1
 	def complete_todo(self):
 		self.todolist[self.cursor][0]=self.status[1]
 	def postpone_todo(self):
 		self.todolist[self.cursor][0]=self.status[2]
 	def remove_task(self):
-		del self.todolist[self.cursor]
-		self.counter-=1
+		del self.todolist[self.cursor[0]]
+		self.counter[0]-=1
 		self.init-=1
 		if self.init<5:
 			self.todolist.append([self.status[0],self.blank,'[   ]'])
