@@ -12,7 +12,7 @@ class TODO(object):
 		self.init=5
 		self.cursor[0]=0
 		self.i=0
-		self.tmp='[   ]'
+		self.tmp=['[   ]'[
 		self.blank='________________________'
 		self.name=name
 	def reset(self,passwd):
