@@ -4,6 +4,7 @@ import datatrans
 import draw
 import os
 import operation
+import movement
 def your_todolist():
 
 	today=checklist.TODO('* * * *Today * * * *')
@@ -28,7 +29,7 @@ def your_todolist():
 			if action in useraction.moves:
 				while True:
 					try:
-						movement.moves(action,today.todolist,today.cursor,today.tmp.today.i)
+						movement.moves(action,today.todolist,today.cursor,today.tmp)
 						break
 					except IndexError:
 						action=useraction.get_user_action()

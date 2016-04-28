@@ -6,7 +6,7 @@ class Move(object):
 	#	self.i=i
 	def init_cursor(self):
 		self.tmp[0]=self.todolist[self.cursor[0]][2]
-	def move_cursor(direction):
+	def move_cursor(self,direction):
 		if direction == 'Up':
 			self.cursor[0] -= 1
 		elif direction== 'Down':
@@ -20,7 +20,8 @@ class Move(object):
 
 def moves(action,todolist,cursor,tmp):
 	a=Move(todolist,cursor,tmp)
-	a.move_cursor(direction)
+	print(a.todolist[a.cursor[0]][2])
+	a.move_cursor(action)
 	a.restore_cursor()
 	a.init_cursor()
 	a.put_cursor()
