@@ -11,8 +11,8 @@ class TODO(object):
 		self.counter=[0]
 		self.init=5
 		self.cursor=[0]
-		self.i=0
-		self.tmp=['[   ]']
+		self.i=[0]
+		self.tmp=["[    ]"]
 		self.blank='________________________'
 		self.name=name
 	def reset(self,passwd):
@@ -22,3 +22,4 @@ class TODO(object):
 				self.todolist.append([self.status[0],self.blank,'[   ]'])
 			self.tmp='[   ]'
 			self.new=0
+
