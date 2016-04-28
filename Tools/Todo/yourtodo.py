@@ -10,7 +10,7 @@ def your_todolist():
 	today=checklist.TODO('* * * *Today * * * *')
 	future=checklist.TODO('* * * * Future * * * *')
 	switcher=0
-	current=today
+	#current=today
 
 	def init(current):
 
@@ -21,8 +21,8 @@ def your_todolist():
 		except FileNotFoundError:
 			today.reset('Reset')
 #                future.reset('Reset')
-		opera=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter)
-		return opera
+		#opera=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter)
+		#return opera
 	def GoToDo():
 		nonlocal current
 		nonlocal switcher
@@ -60,7 +60,7 @@ def your_todolist():
 				op=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter)
 				if op.execution(action)==0:
 					break
-	op=init(current)
+	init()
 
 	GoToDo()
 	
