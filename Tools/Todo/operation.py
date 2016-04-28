@@ -6,6 +6,7 @@ class Operation(object):
 		self.status=status
 		self.init=init
 		self.counter=counter
+		self.blank='_'*30
 	def new_todo(self):
 		task=useraction.get_user_input()
 
@@ -31,21 +32,23 @@ class Operation(object):
 			if other == 'Reset':
 				pass
 			elif other == 'Clear':
-				cnt=0;count=0
+				i=0
 				L=len(self.todolist)
-				for each in self.todolist:
-					if each[0]=='☒':
+				
+				while i < L:
+					if self.todolist[i][0]=='☒':
+						del self.todolist[i]
+						i-=1
+						L-=1
+					i+=1
 						
-						self.todolist.remove(each)
-						print(self.todolist)
 						
-						cnt+=1
-					count+=1
-				if count-cnt<5:
-					b=(5-(count-cnt))
+					print(self.todolist)
+				if L<5:
+					b=(5-L)
 					print(b)
 					for n in range(b):
-						self.todolist.append(['☐','________________________','[   ]'])
+						self.todolist.append(['☐',self.blank,'[   ]'])
 			elif other == 'Save':
 				pass
 			elif other == 'Load':

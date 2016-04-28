@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import getch
 #import user
-actions=['Up','Down','New','Complete','Postpone','Remove','Help','Other']
-letter_code="WSNCPRHOwsncprho"
+actions=['Up','Down','New','Complete','Postpone','Remove','Help','Other','Switch']
+letter_code="WSNCPRHOVwsncprhov"
 action_dict=dict(zip(letter_code,actions*2))
 moves=set(['Up','Down'])
 def main_select(select):

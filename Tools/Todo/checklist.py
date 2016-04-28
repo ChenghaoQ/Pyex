@@ -12,8 +12,8 @@ class TODO(object):
 		self.init=5
 		self.cursor=[0]
 		self.i=[0]
-		self.tmp=["[    ]"]
-		self.blank='________________________'
+		self.tmp=["[   ]"]
+		self.blank='_'*30
 		self.name=name
 	def reset(self,passwd):
 		if passwd== 'Reset':
