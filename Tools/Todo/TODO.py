@@ -2,7 +2,7 @@ import menu
 import helpdoc
 import yourtodo
 import usermanager
-
+import datatrans
 def main():
 	user=usermanager.User()
 	while True:
@@ -10,6 +10,7 @@ def main():
 		select=int(input())
 		if select == 1:
 			user.add_user()
+			datatrans.saveuser(user.usr,'Userdata')
 
 
 		elif select == 2:

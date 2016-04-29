@@ -74,6 +74,7 @@ class Operation(object):
 			self.remove_task()
 		elif action == 'Help' :
 			print(helpdoc.help)
+			input("Press Enter to continue...")
 		elif action == 'Other':
 			if self.other_command(name)==0:
 				return 0        
