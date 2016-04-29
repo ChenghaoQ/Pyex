@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import useraction
 import checklist
 import datatrans
@@ -5,26 +8,34 @@ import draw
 import os
 import operation
 import movement
-def your_todolist():
+import helpdoc
+
+
+def your_todolist(username):
 
 	today=checklist.TODO('* * * *Today * * * *')
+	
 	future=checklist.TODO('* * * * Future * * * *')
+	
 	switcher=0
 	#current=today
 
-	def init(current):
+	def init():
 
 		try:
 			#today.tmp='[   ]'
 			future.reset('Reset')
-			today.todolist=datatrans.loadfile()
+			today.reset('Reset')
+			#today.todolist=datatrans.loadfile()
+			today.todolist[0][2]='[ * ]'
+			future.todolist[0][2]='[ * ]'
 		except FileNotFoundError:
 			today.reset('Reset')
 #                future.reset('Reset')
 		#opera=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter)
 		#return opera
 	def GoToDo():
-		nonlocal current
+		
 		nonlocal switcher
 		while True:
 			#Draw the list
@@ -33,7 +44,7 @@ def your_todolist():
 			b=draw.Draw(future.todolist,future.name)
 			a.draw_TODO()
 			b.draw_TODO()
-			print(current.todolist)
+			
 			print("-----%d------"%switcher)
 			print("-"*40)
 			action = useraction.get_user_action()
@@ -41,11 +52,12 @@ def your_todolist():
 			
 			if action == 'Switch':
 				switcher+=1
-				
 				continue
 			if switcher%2==0:
+				future.todolist[future.cursor[0]][2]='[   ]'
 				current=today
 			elif switcher%2==1:
+				today.todolist[today.cursor[0]][2]='[   ]'
 				current=future
 			
 			if action in useraction.moves:
@@ -58,11 +70,12 @@ def your_todolist():
 						continue
 			else:
 				op=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter)
-				if op.execution(action)==0:
-					break
+				if op.execution(action,username)==0:
+					return False
+	os.system('clear')
+	helpdoc.import_info()
 	init()
 
 	GoToDo()
 	
 
-your_todolist()

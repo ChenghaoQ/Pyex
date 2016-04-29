@@ -1,4 +1,6 @@
 import useraction
+import helpdoc
+import datatrans
 class Operation(object):
 	def __init__(self,todolist,cursor,status,init,counter):
 		self.todolist=todolist
@@ -26,7 +28,7 @@ class Operation(object):
 		if self.init<5:
 			self.todolist.append([self.status[0],self.blank,'[   ]'])
 			self.init+=1
-	def other_command(self):
+	def other_command(self,name):
 		while True:
 			other=input("Please enter your command: ")
 			if other == 'Reset':
@@ -49,8 +51,10 @@ class Operation(object):
 					print(b)
 					for n in range(b):
 						self.todolist.append(['☐',self.blank,'[   ]'])
+				break
 			elif other == 'Save':
-				pass
+				datatrans.savefile(self.todolist,name)
+				break
 			elif other == 'Load':
 				pass
 			elif other == 'Back':
@@ -59,7 +63,7 @@ class Operation(object):
 				return 0;
 			else:
 				print("Sorry, I can't do that, try again please~")
-	def execution(self,action):
+	def execution(self,action,name):
 		if action ==  'New':
 			self.new_todo()
 		elif action == 'Complete':
@@ -69,9 +73,9 @@ class Operation(object):
 		elif action == 'Remove':
 			self.remove_task()
 		elif action == 'Help' :
-			pass
+			print(helpdoc.help)
 		elif action == 'Other':
-			if self.other_command()==0:
+			if self.other_command(name)==0:
 				return 0        
 
 def TODO_operation(todo,action):

@@ -20,6 +20,6 @@ class TODO(object):
 			del self.todolist[:]
 			for n in range(5):
 				self.todolist.append([self.status[0],self.blank,'[   ]'])
-			self.tmp='[   ]'
+			self.tmp=['[   ]']
 			self.new=0
 

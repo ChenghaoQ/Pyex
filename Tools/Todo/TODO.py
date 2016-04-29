@@ -1,31 +1,38 @@
 import menu
+import helpdoc
+import yourtodo
+import usermanager
+
 def main():
-        while True:
-                menu.main_menu()
-                select=int(input())
-                if select not in range(1,6):
-                #   useraction.main_select(select)#         
-                #Here to make selection
+	user=usermanager.User()
+	while True:
+		menu.main_menu()
+		select=int(input())
 		if select == 1:
 			user.add_user()
 
 
 		elif select == 2:
+			while True:
+				name_input=input("Please Enter your username: ")
 
-			if user.userlogin():
-				while True:
-					menu.after_login()
-					option=int(input())
-					if option == 1:
-						pass
-					elif option == 2:
-						pass
-					elif option == 3:
-						user.delete_user()
-					elif option == 4:
-						break	
+				if user.user_login(name_input):
+					while True:
+						menu.after_login(name_input)
+						option=int(input())
+						if option == 1:
+							yourtodo.your_todolist(name_input)
+						elif option == 2:
+							pass
+						elif option == 3:
+							user.delete_user()
+						elif option == 4:
+							break	
+				else:
+					continue
+				break
 
-		
+
 		elif select == 3:
 			print(' **** Chenghao Qian is a lazy guy ****')
 			input("Press Enter to continue...")
@@ -47,7 +54,7 @@ def main():
 if __name__ == '__main__':
 	main()
 
-	
 
- 
+
+
 
