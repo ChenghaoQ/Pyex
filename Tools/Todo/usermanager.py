@@ -1,8 +1,11 @@
+import random
 class User(object):
 
 	def __init__(self):
 		self.usr={}
-
+		self.id_num=set()
+		self.id={}
+		
 	def add_user(self):
 		while True:
 			name= input("Please enter your username: ")
@@ -12,7 +15,14 @@ class User(object):
 			else:
 				passwd=input("Please enter Your Password: ")
 				self.usr[name]=passwd
-				print("Congrats!Your account has been successfully established!")
+				while True:
+					num=random.randint(10000,99999)
+					if num not in self.id_num:
+						self.id_num.add(num)
+						break
+				self.id[name]=num
+				print("Congrats!Your account has been successfully established!\nYour user data id is %d"%num)
+				
 				break
 	def user_login(self,name_input):
 		while True:
@@ -53,6 +63,7 @@ class User(object):
 						del name_attempt
 						del passwd_attempt
 						print("You account has been successfully canceled, welcome back any time!")
+						self.count-=1
 						break
 					else:
 						print("Invaild Password, try again please!")
@@ -64,7 +75,7 @@ class User(object):
 					break
 			else:	
 				print("User not exists, try again please!")
-				counter+=1
+			
 				if counter >3:
 					print("You have run out of your choice!Break Anyway")
 					break

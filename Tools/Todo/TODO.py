@@ -6,14 +6,15 @@ import datatrans
 import os
 def main():
 	user=usermanager.User()
-	user.usr=datatrans.loaduser()
+	user.usr,user.id=datatrans.loaduser()
 	while True:
 		os.system('clear')
 		menu.main_menu()
 		select=int(input())
 		if select == 1:
 			user.add_user()
-			datatrans.saveuser(user.usr)
+			datatrans.saveuser(user.usr,user.id)
+			input("Press Enter to continue ...")
 
 
 		elif select == 2:
@@ -26,12 +27,14 @@ def main():
 						menu.after_login(name_input)
 						option=int(input())
 						if option == 1:
-							yourtodo.your_todolist(name_input)
+							yourtodo.your_todolist(user.id[name_input])
 						elif option == 2:
 							pass
 						elif option == 3:
 							user.delete_user()
 						elif option == 4:
+							#print("Your current data will be automatically saved")
+							#datatrans.savefile(yourtodo.your_todolist.current.todolist,user.id[name_input])
 							break	
 				else:
 					continue
@@ -47,6 +50,7 @@ def main():
 			input("Press Enter to continue...")
 
 		elif select == 5:
+
 			break
 		else:
 			print("Invalid selection, try again please")

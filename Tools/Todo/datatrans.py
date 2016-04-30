@@ -1,15 +1,12 @@
 class Sav(object):
 	def __init__(self,data):
 		self.data=data
-	def savedata(self,name):
-		dat1=open("./bin/%s.dat"%name,'w')
+	def savedata(self,id):
+		dat1=open("./bin/usr/%s.dat"%id,'w')
 		for line in self.data:
-			for elem in line:
-				if elem[2]=='[ * ]':
-
-					elem[2]='[   ]'
-				dat1.write(elem+',') 
-			dat1.write('\n')
+			if line[2]=='[ * ]':
+				line[2]='[   ]'
+			dat1.writelines('{} {} {} {}'.format(line[0],line[1],line[2],'\n'))
 		dat1.close()
 	
 
@@ -27,20 +24,26 @@ def loadfile():
 		listdata.append(b)
 	datafile.close()
 	return listdata
-def saveuser(usrdict):
-	f=open('./bin/Userdata.dat',"a")
+def saveuser(usrdict,userid):
+	f=open('./bin/Userdata.dat',"w")
 	#for line in usrdict.item():
-	f.writelines('{} {} {}'.format(k,v,'\n') for k, v in usrdict.items())
+	for k, v in usrdict.items():
+		f.writelines('{} {} {} {}'.format(k,v,userid[k],'\n') )
+	f.close()
+
 def loaduser():
 	g=open('./bin/Userdata.dat','r')
 	list1=[]
 	list2=[]
+	list3=[]
 	for each in g:
 		each=each.strip('\n')
 		c=each.split(' ')
 		list1.append(c[0])
 		list2.append(c[1])
+		list3.append(c[2])
 	dic=dict(zip(list1,list2))
-	return dic
-	
+	dic2=dict(zip(list1,list3))
+	return dic,dic2
+	g.close()
 

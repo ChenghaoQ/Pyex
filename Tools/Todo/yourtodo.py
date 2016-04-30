@@ -11,7 +11,7 @@ import movement
 import helpdoc
 
 
-def your_todolist(username):
+def your_todolist(userid):
 
 	today=checklist.TODO('* * * *Today * * * *')
 	
@@ -82,11 +82,12 @@ def your_todolist(username):
 						movement.moves(action,current.todolist,current.cursor,current.tmp,current.i)
 						break
 					except IndexError:
-						action=useraction.get_user_action()
-						continue
+						print("Uhoh..Out of Range..")
+						break
+				continue
 			else:
 				op=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter,post.todolist,comp.todolist)
-				if op.execution(action,username)==0:
+				if op.execution(action,userid)==0:
 					return False
 	os.system('clear')
 	helpdoc.import_info()
