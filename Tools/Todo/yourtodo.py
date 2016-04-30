@@ -13,7 +13,7 @@ import helpdoc
 
 def your_todolist(userid):
 
-	today=checklist.TODO('* * * *Today * * * *')
+	today=checklist.TODO('* * * * Today * * * *')
 	
 	future=checklist.TODO('* * * * Future * * * *')
 
@@ -26,13 +26,12 @@ def your_todolist(userid):
 	def init():
 
 		try:
-			#today.tmp='[   ]'
-			future.reset('Reset')
-			today.reset('Reset')
-
-			#today.todolist=datatrans.loadfile()
-			today.todolist[0][2]='[ * ]'
-			future.todolist[0][2]='[ * ]'
+			today.todolist=datatrans.loadfile(userid,'today')
+			future.todolist=datatrans.loadfile(userid,'future')
+			comp.todolist=datatrans.loadfile(userid,'complete')
+			post.todolist=datatrans.loadfile(userid,'postpone')
+			#today.todolist[0][2]='[ * ]'
+			#future.todolist[0][2]='[ * ]'
 		except FileNotFoundError:
 			today.reset('Reset')
 			future.reset('Reset')
@@ -54,11 +53,18 @@ def your_todolist(userid):
 			print("-"*40)
 			#Here is a problem
 			if switcher%4==0:
-				future.todolist[future.cursor[0]][2]='[   ]'
+				try:
+					future.todolist[future.cursor[0]][2]='[   ]'
+				except:
+					pass
 				current=today
 				print("Your Current position: Today")
 			elif switcher%4==1:
-				today.todolist[today.cursor[0]][2]='[   ]'
+				try:
+
+					today.todolist[today.cursor[0]][2]='[   ]'
+				except:
+					pass
 				current=future
 				print("Your Current position: Future")
 			elif switcher%4==2:
@@ -86,7 +92,7 @@ def your_todolist(userid):
 						break
 				continue
 			else:
-				op=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter,post.todolist,comp.todolist)
+				op=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter,post.todolist,comp.todolist,future.todolist,current)
 				if op.execution(action,userid)==0:
 					return False
 	os.system('clear')

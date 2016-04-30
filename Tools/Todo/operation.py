@@ -1,8 +1,9 @@
 import useraction
 import helpdoc
 import datatrans
+import os
 class Operation(object):
-	def __init__(self,todolist,cursor,status,init,counter,todolistp,todolistc):
+	def __init__(self,todolist,cursor,status,init,counter,todolistp,todolistc,todolistf,whole):
 		self.todolist=todolist
 		self.cursor=cursor
 		self.status=status
@@ -11,6 +12,8 @@ class Operation(object):
 		self.blank='_'*30
 		self.todolistp=todolistp
 		self.todolistc=todolistc
+		self.todolistf=todolistf
+		self.a=whole
 	def new_todo(self):
 		task=useraction.get_user_input()
 
@@ -39,7 +42,8 @@ class Operation(object):
 		while True:
 			other=input("Please enter your command: ")
 			if other == 'Reset':
-				pass
+				self.a.reset('Reset')
+				break
 			elif other == 'Clear':
 				i=0
 				L=len(self.todolist)
@@ -60,7 +64,14 @@ class Operation(object):
 						self.todolist.append(['☐',self.blank,'[   ]'])
 				break
 			elif other == 'Save':
-				datatrans.savefile(self.todolist,name)
+				if os.path.exists('./bin/usr/%s'%name):
+					pass
+				else:
+					os.mkdir('./bin/usr/%s'%name)
+				datatrans.savefile(self.todolist,name,"today")
+				datatrans.savefile(self.todolistf,name,'future')
+				datatrans.savefile(self.todolistc,name,'postpone')
+				datatrans.savefile(self.todolistp,name,'complete')
 				break
 			elif other == 'Load':
 				pass

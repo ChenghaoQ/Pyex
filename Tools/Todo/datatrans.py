@@ -1,8 +1,8 @@
 class Sav(object):
 	def __init__(self,data):
 		self.data=data
-	def savedata(self,id):
-		dat1=open("./bin/usr/%s.dat"%id,'w')
+	def savedata(self,id,title):
+		dat1=open("./bin/usr/%s/%s.dat"%(id,title),'w')
 		for line in self.data:
 			if line[2]=='[ * ]':
 				line[2]='[   ]'
@@ -10,12 +10,12 @@ class Sav(object):
 		dat1.close()
 	
 
-def savefile(datalist,name):
+def savefile(datalist,name,title):
 	wrote=Sav(datalist)
-	wrote.savedata(name)
+	wrote.savedata(name,title)
 
-def loadfile():
-	datafile=open('todolist.dat','r')
+def loadfile(id,title):
+	datafile=open("./bin/usr/%s/%s.dat"%(id,title),'r')
 	listdata=[]
 	for each in datafile:
 		each=each.strip('\n')	

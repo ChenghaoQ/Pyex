@@ -8,8 +8,10 @@ class Draw(object):
 		print("* * * * %s * * * * *"%self.name)
 		print("-"*40)
 		for each in self.todolist:
-			print('{:<3}{:<35}{:<}'.format(each[0],each[1],each[2]))
-		
+			try:
+				print('{:<3}{:<35}{:<}'.format(each[0],each[1],each[2]))
+			except IndexError:
+				pass
 	def draw_string(string):
 		print(string+'\n')
 
