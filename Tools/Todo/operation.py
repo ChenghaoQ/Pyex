@@ -64,10 +64,10 @@ class Operation(object):
 						self.todolist.append(['☐',self.blank,'[   ]'])
 				break
 			elif other == 'Save':
-				if os.path.exists('./bin/usr/%s'%name):
+				if os.path.exists('./data/usr/%s'%name):
 					pass
 				else:
-					os.mkdir('./bin/usr/%s'%name)
+					os.mkdir('./data/usr/%s'%name)
 				datatrans.savefile(self.todolist,name,"today")
 				datatrans.savefile(self.todolistf,name,'future')
 				datatrans.savefile(self.todolistc,name,'postpone')
