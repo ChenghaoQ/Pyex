@@ -2,13 +2,15 @@ import useraction
 import helpdoc
 import datatrans
 class Operation(object):
-	def __init__(self,todolist,cursor,status,init,counter):
+	def __init__(self,todolist,cursor,status,init,counter,todolistp,todolistc):
 		self.todolist=todolist
 		self.cursor=cursor
 		self.status=status
 		self.init=init
 		self.counter=counter
 		self.blank='_'*30
+		self.todolistp=todolistp
+		self.todolistc=todolistc
 	def new_todo(self):
 		task=useraction.get_user_input()
 
@@ -19,8 +21,13 @@ class Operation(object):
 		self.counter[0]+=1
 	def complete_todo(self):
 		self.todolist[self.cursor[0]][0]=self.status[1]
+		self.todolistc.append(self.todolist[self.cursor[0]])
+		self.remove_task()
+
 	def postpone_todo(self):
 		self.todolist[self.cursor[0]][0]=self.status[2]
+		self.todolistp.append(self.todolist[self.cursor[0]])
+		self.remove_task()
 	def remove_task(self):
 		del self.todolist[self.cursor[0]]
 		self.counter[0]-=1

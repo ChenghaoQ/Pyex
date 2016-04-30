@@ -13,6 +13,6 @@ def after_login(username):
 	2. Modify your account
 	3. Account Delete
 	4. Back to Main Menu
-	Please Select: """)
+	Please Select: """%username)
 
 

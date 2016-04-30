@@ -3,14 +3,17 @@ import helpdoc
 import yourtodo
 import usermanager
 import datatrans
+import os
 def main():
 	user=usermanager.User()
+	user.usr=datatrans.loaduser()
 	while True:
+		os.system('clear')
 		menu.main_menu()
 		select=int(input())
 		if select == 1:
 			user.add_user()
-			datatrans.saveuser(user.usr,'Userdata')
+			datatrans.saveuser(user.usr)
 
 
 		elif select == 2:
@@ -19,6 +22,7 @@ def main():
 
 				if user.user_login(name_input):
 					while True:
+						os.system('clear')
 						menu.after_login(name_input)
 						option=int(input())
 						if option == 1:

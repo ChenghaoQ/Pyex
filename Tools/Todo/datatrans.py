@@ -27,9 +27,20 @@ def loadfile():
 		listdata.append(b)
 	datafile.close()
 	return listdata
-def saveuser(usrdict,filename):
-	f=open('./bin/%s'%filename,"a")
+def saveuser(usrdict):
+	f=open('./bin/Userdata.dat',"a")
 	#for line in usrdict.item():
 	f.writelines('{} {} {}'.format(k,v,'\n') for k, v in usrdict.items())
+def loaduser():
+	g=open('./bin/Userdata.dat','r')
+	list1=[]
+	list2=[]
+	for each in g:
+		each=each.strip('\n')
+		c=each.split(' ')
+		list1.append(c[0])
+		list2.append(c[1])
+	dic=dict(zip(list1,list2))
+	return dic
 	
 
