@@ -76,6 +76,13 @@ def your_todolist(userid):
 				current=comp
 				print("Your Current position: Complete")
 
+			print("* * * * * * * Description * * * * * * *\n")
+			try:
+				print("->",current.todolist[current.cursor[0]][3])
+			except:
+				print("Nothing here")
+			print("- - - - - - - - - - - - - - - - - - - -")
+
 			action = useraction.get_user_action()
 			
 			

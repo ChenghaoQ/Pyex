@@ -21,6 +21,9 @@ class Operation(object):
 			self.todolist[self.counter[0]]=[self.status[0],task,'[   ]']
 		else:
 			self.todolist.append([self.status[0],task,'[   ]'])
+		print("Further details need to describe?'\n'-->",end='')
+		description=input()
+		self.todolist[self.counter[0]].append(description)
 		self.counter[0]+=1
 	def complete_todo(self):
 		self.todolist[self.cursor[0]][0]=self.status[1]

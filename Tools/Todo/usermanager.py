@@ -58,12 +58,12 @@ class User(object):
 				while True:
 					attempt=0
 					passwd_attempt=input("Please Enter your password: ")
-					if passwd_attempt==self.usr[attempt_name]:
+					if passwd_attempt==self.usr[name_attempt]:
 						del self.usr[name_attempt]
+						del self.id[name_attempt]
 						del name_attempt
 						del passwd_attempt
 						print("You account has been successfully canceled, welcome back any time!")
-						self.count-=1
 						break
 					else:
 						print("Invaild Password, try again please!")
@@ -72,7 +72,7 @@ class User(object):
 							print("You have run out of your choice!Break Anyway")
 							break
 						continue
-					break
+				break
 			else:	
 				print("User not exists, try again please!")
 			
@@ -88,7 +88,7 @@ class User(object):
 				while True:
 					attempt=0
 					passwd_attempt=("Please Enter your password: ")
-					if passwd_attempt==self.usr[attempt_name]:
+					if passwd_attempt==self.usr[name_attempt]:
 						passwd=("Please enter your new password: ")
 						self.usr[name_attempt]=passwd
 						del passwd_attempt
