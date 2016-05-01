@@ -99,7 +99,7 @@ def your_todolist(userid):
 						break
 				continue
 			else:
-				op=operation.Operation(current.todolist,current.cursor,current.status,current.init,current.counter,post.todolist,comp.todolist,future.todolist,current)
+				op=operation.Operation(current,post,comp,future,today)
 				if op.execution(action,userid)==0:
 					return False
 	os.system('clear')

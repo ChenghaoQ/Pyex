@@ -3,17 +3,17 @@ import helpdoc
 import datatrans
 import os
 class Operation(object):
-	def __init__(self,todolist,cursor,status,init,counter,todolistp,todolistc,todolistf,whole):
-		self.todolist=todolist
-		self.cursor=cursor
-		self.status=status
-		self.init=init
-		self.counter=counter
+	def __init__(self,current,post,comp,future,today):
+		self.todolist=current.todolist
+		self.cursor=current.cursor
+		self.status=current.status
+		self.init=current.init
+		self.counter=current.counter
 		self.blank='_'*30
-		self.todolistp=todolistp
-		self.todolistc=todolistc
-		self.todolistf=todolistf
-		self.a=whole
+		self.todolistp=post.todolist
+		self.todolistc=comp.todolist
+		self.todolistf=future.todolist
+		self.a=current
 	def new_todo(self):
 		task=useraction.get_user_input()
 
