@@ -10,10 +10,12 @@ class Operation(object):
 		self.init=current.init
 		self.counter=current.counter
 		self.blank='_'*30
-		self.todolistp=post.todolist
-		self.todolistc=comp.todolist
-		self.todolistf=future.todolist
+		self.post=post
+		self.comp=comp
+		self.future=future
+		self.today=today
 		self.a=current
+
 	def new_todo(self):
 		task=useraction.get_user_input()
 
@@ -27,12 +29,12 @@ class Operation(object):
 		self.counter[0]+=1
 	def complete_todo(self):
 		self.todolist[self.cursor[0]][0]=self.status[1]
-		self.todolistc.append(self.todolist[self.cursor[0]])
+		self.comp.todolist.append(self.todolist[self.cursor[0]])
 		self.remove_task()
 
 	def postpone_todo(self):
 		self.todolist[self.cursor[0]][0]=self.status[2]
-		self.todolistp.append(self.todolist[self.cursor[0]])
+		self.post.todolist.append(self.todolist[self.cursor[0]])
 		self.remove_task()
 	def remove_task(self):
 		del self.todolist[self.cursor[0]]
@@ -71,17 +73,17 @@ class Operation(object):
 					pass
 				else:
 					os.mkdir('./data/usr/%s'%name)
-				datatrans.savefile(self.todolist,name,"today")
-				datatrans.savefile(self.todolistf,name,'future')
-				datatrans.savefile(self.todolistc,name,'postpone')
-				datatrans.savefile(self.todolistp,name,'complete')
+				datatrans.savefile(self.today,name,"today")
+				datatrans.savefile(self.future,name,'future')
+				datatrans.savefile(self.post,name,'postpone')
+				datatrans.savefile(self.comp,name,'complete')
 				break
 			elif other == 'Load':
 				pass
-			elif other == 'Back':
+			elif other == 'Return':
 				break
-			elif other == ('Exit' or 'Quit'):
-				return 0;
+			elif other == ('Back' or 'Quit'):
+				return 0
 			else:
 				print("Sorry, I can't do that, try again please~")
 	def execution(self,action,name):

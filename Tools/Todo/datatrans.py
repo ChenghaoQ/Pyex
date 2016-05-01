@@ -1,18 +1,28 @@
 class Sav(object):
-	def __init__(self,data):
-		self.data=data
+	def __init__(self,todo):
+		self.data=todo.todolist
+		self.cursor=todo.cursor
+		self.counter=todo.counter
+		self.i=todo.i
+		self.tmp=todo.tmp
 	def savedata(self,id,title):
 		dat1=open("./data/usr/%s/%s.dat"%(id,title),'w')
 		for line in self.data:
 			if line[2]=='[ * ]':
 				line[2]='[   ]'
-			dat1.writelines('{},{},{},{}'.format(line[0],line[1],line[2],'\n'))
+			try:
+				dat1.writelines('{},{},{},{},{}'.format(line[0],line[1],line[2],line[3],'\n'))
+			except:
+				dat1.writelines('{},{},{},{}'.format(line[0],line[1],line[2],'\n'))
 		dat1.close()
-	
-
-def savefile(datalist,name,title):
-	wrote=Sav(datalist)
-	wrote.savedata(name,title)
+	def saveargs(self,id,title):
+		dat2=open("./data/usr/%s/%s_args.dat"%(id,title),'w')
+		dat2.writelines(('{},{},{},{},{}'.format(self.cursor[0],self.counter[0],self.i[0],self.tmp[0],'\n')))
+		dat2.close()
+def savefile(todo,userid,title):
+	wrote=Sav(todo)
+	wrote.savedata(userid,title)
+	wrote.saveargs(userid,title)
 
 def loadfile(id,title):
 	datafile=open("./data/usr/%s/%s.dat"%(id,title),'r')
