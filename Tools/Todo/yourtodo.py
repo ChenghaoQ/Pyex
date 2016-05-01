@@ -26,12 +26,8 @@ def your_todolist(userid):
 	def init():
 
 		try:
-			today.todolist=datatrans.loadfile(userid,'today')
-			future.todolist=datatrans.loadfile(userid,'future')
-			comp.todolist=datatrans.loadfile(userid,'complete')
-			post.todolist=datatrans.loadfile(userid,'postpone')
-			#today.todolist[0][2]='[ * ]'
-			#future.todolist[0][2]='[ * ]'
+
+			datatrans.loadall(userid,today,future,post,comp)
 		except FileNotFoundError:
 			today.reset('Reset')
 			future.reset('Reset')
@@ -68,11 +64,20 @@ def your_todolist(userid):
 				current=future
 				print("Your Current position: Future")
 			elif switcher%4==2:
-				#post.todolist[post.cursor[0]][2]='[   ]'
+				try:
+					post.todolist[post.cursor[0]][2]='[   ]'
+				except:
+					pass
+
 				current=post
 				print("Your Current position: Gone")
 			elif switcher%4==3:
-				#comp.todolist[post.cursor[0]][2]='[   ]'
+				
+				try:
+					comp.todolist[post.cursor[0]][2]='[   ]'
+				except:
+					pass
+
 				current=comp
 				print("Your Current position: Complete")
 
@@ -92,7 +97,7 @@ def your_todolist(userid):
 			if action in useraction.moves:
 				while True:
 					try:
-						movement.moves(action,current.todolist,current.cursor,current.tmp,current.i)
+						movement.moves(action,current)
 						break
 					except IndexError:
 						print("Uhoh..Out of Range..")
@@ -102,6 +107,8 @@ def your_todolist(userid):
 				op=operation.Operation(current,post,comp,future,today)
 				if op.execution(action,userid)==0:
 					return False
+				print('\n\n\n\n',today.cursor,'\n\n\n\n\n')
+				
 	os.system('clear')
 	helpdoc.import_info()
 	init()

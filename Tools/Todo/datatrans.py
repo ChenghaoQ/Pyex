@@ -34,6 +34,29 @@ def loadfile(id,title):
 		listdata.append(b)
 	datafile.close()
 	return listdata
+def loadargs(id,title):
+	dat3=open("./data/usr/%s/%s_args.dat"%(id,title),'r')
+	ldata=[]
+	for each in dat3:
+		each=each.strip('\n')	
+		b=each.split(',')
+		b.pop()
+		#ldata.append(b)
+		#print(b)
+
+	return int(b[0]),int(b[1]),int(b[2]),b[3]
+
+def loadall(userid,today,future,post,comp):
+	today.todolist=loadfile(userid,'today')
+	future.todolist=loadfile(userid,'future')
+	post.todolist=loadfile(userid,'postpone')
+	comp.todolist=loadfile(userid,'complete')
+	today.cursor[0],today.counter[0],today.i[0],today.tmp[0]=loadargs(userid,'today')
+	future.cursor[0],future.counter[0],future.i[0],future.tmp[0]=loadargs(userid,'future')
+	post.cursor[0],post.counter[0],post.i[0],post.tmp[0]=loadargs(userid,'postpone')
+	comp.cursor[0],comp.counter[0],comp.i[0],comp.tmp[0]=loadargs(userid,'complete')
+
+
 def saveuser(usrdict,userid):
 	f=open('./data/Userdata.dat',"w")
 	#for line in usrdict.item():

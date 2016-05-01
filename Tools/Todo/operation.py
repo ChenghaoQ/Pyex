@@ -29,11 +29,13 @@ class Operation(object):
 		self.counter[0]+=1
 	def complete_todo(self):
 		self.todolist[self.cursor[0]][0]=self.status[1]
+		self.todolist[self.cursor[0]][2]='[   ]'
 		self.comp.todolist.append(self.todolist[self.cursor[0]])
 		self.remove_task()
 
 	def postpone_todo(self):
 		self.todolist[self.cursor[0]][0]=self.status[2]
+		self.todolist[self.cursor[0]][2]='[   ]'
 		self.post.todolist.append(self.todolist[self.cursor[0]])
 		self.remove_task()
 	def remove_task(self):
@@ -79,11 +81,23 @@ class Operation(object):
 				datatrans.savefile(self.comp,name,'complete')
 				break
 			elif other == 'Load':
-				pass
+				datatrans.loadall(name,self.today,self.future,self.post,self.comp)
+				break
 			elif other == 'Return':
 				break
 			elif other == ('Back' or 'Quit'):
+				print("Your datawill be saveautomaticlly")
+				datatrans.savefile(self.today,name,"today")
+				datatrans.savefile(self.future,name,'future')
+				datatrans.savefile(self.post,name,'postpone')
+				datatrans.savefile(self.comp,name,'complete')
 				return 0
+			elif other == ('Exit'):
+				choice=input("Your data will not be saved if Exit directly\nStill want to quit?(y/n)")
+				if choice == 'y':
+					exit()
+				else:
+					break
 			else:
 				print("Sorry, I can't do that, try again please~")
 	def execution(self,action,name):
