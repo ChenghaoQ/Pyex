@@ -1,8 +1,8 @@
-import menu
-import helpdoc
-import yourtodo
-import usermanager
-import datatrans
+from bin import menu
+from bin import helpdoc
+from bin import yourtodo
+from bin import usermanager
+from bin import datatrans
 import os
 def main():
 	user=usermanager.User()
@@ -29,12 +29,10 @@ def main():
 						if option == 1:
 							yourtodo.your_todolist(user.id[name_input])
 						elif option == 2:
-							pass
+							user.modify_user()
 						elif option == 3:
 							user.delete_user()
 						elif option == 4:
-							#print("Your current data will be automatically saved")
-							#datatrans.savefile(yourtodo.your_todolist.current.todolist,user.id[name_input])
 							break	
 				else:
 					continue

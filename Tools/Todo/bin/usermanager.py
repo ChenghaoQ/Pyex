@@ -63,7 +63,7 @@ class User(object):
 						del self.id[name_attempt]
 						del name_attempt
 						del passwd_attempt
-						print("You account has been successfully canceled, welcome back any time!")
+						input("You account has been successfully canceled, welcome back any time!\nPress Enter to continue..")
 						break
 					else:
 						print("Invaild Password, try again please!")

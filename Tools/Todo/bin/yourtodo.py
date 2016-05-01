@@ -107,7 +107,7 @@ def your_todolist(userid):
 				op=operation.Operation(current,post,comp,future,today)
 				if op.execution(action,userid)==0:
 					return False
-				print('\n\n\n\n',today.cursor,'\n\n\n\n\n')
+				
 				
 	os.system('clear')
 	helpdoc.import_info()
