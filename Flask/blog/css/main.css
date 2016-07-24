@@ -1,0 +1,131 @@
+nav
+{   background:#ccc;
+    height:50px;
+}
+
+nav ul
+{
+    list-style: none;
+    margin: 0;
+    float:right;
+}
+nav ul li,nav .logo
+{
+        display:inline-block;
+        line-height:50px;
+        margin-right: 20px;
+    
+}
+nav ul li a
+{
+        line-height:inherit;/*make the content center in height*/
+        text-decoration:none;
+        display:inline-block;/*可以点击整块*/
+        height:inherit;    
+        color:#fff;
+}
+nav ul li.logo
+{
+    float:left;
+}
+#banner
+{
+    margin-top: 0px;
+    background:#777;
+    height:700px;
+}
+#banner .inner
+{
+    max-width:200px;
+    text-align:center;
+    margin: 0 auto;/*整个位置居中*/
+    position:relative;
+    top:160px;
+}
+#banner .inner h1
+{
+        margin:0;/*去掉导航栏和下面背景被h1隔开的间隔*/
+}
+
+button
+{
+    border:none;
+    background:#333;
+    color:#eee;
+    padding:10px 20px;
+    margin-top: 15px;
+    
+}
+#banner button
+{
+    padding:14px 40px;
+}
+
+#banner .inner .more
+{
+    margin-top:310px;
+}
+
+.sub-heading
+{
+    line-height: 30px;
+    margin:12px;
+}
+.logo
+{
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.logo a
+{
+    color:#fff;/*不能在.logo里面设置*/
+    padding:20px;
+}
+
+/*content*/
+.hr
+{
+    width:100%;
+    height:2px;
+    margin:20 auto;
+    
+}
+h2
+{
+    margin:0;
+    font-size: 30px;
+}
+.green-section
+{
+    background:#089DB0;
+    color:#fff;
+    text-align: center;
+    padding: 100px 0;
+}
+.green-section .hr /*这是里面的横线*/
+{
+    background: #078494;
+}
+
+.green-section .icon-group .icon
+{
+    display: inline-block;
+    width:80px;
+    height: 80px;
+    background:#000;
+    transform:rotate(45deg);/*rotate 45 degree*/
+    margin: 20px;
+    background:#0d6f7c
+    /*border:1px solid #0d6f7c;*/
+}
+.icon-group
+{
+    margin-top:60px;
+}
+.wrapper
+{
+    max-width:1080px;
+    margin:0 auto;
+}
+
