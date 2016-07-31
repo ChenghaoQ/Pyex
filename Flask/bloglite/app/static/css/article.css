@@ -56,6 +56,15 @@ nav ul li
     
     
 }
+#sidebar_trigger
+{
+    color:#fff;
+    text-decoration: none;
+    float:right;
+    margin-top:50%;
+    display:block;
+    font-size: 20px;
+}
 .main-page
 {
     background-color: antiquewhite;
