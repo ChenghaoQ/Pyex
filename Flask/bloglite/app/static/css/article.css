@@ -1,0 +1,18 @@
+.content_wrapper
+{
+    width:75%;
+    margin:0 auto;
+    background:#fefefe;
+}
+
+article
+{
+    line-height: 2;/*行高*/
+    padding:10px 0;
+}
+.article_info
+{
+    font-size:14px;
+    color:#666;
+    padding: 15px 0;
+}
