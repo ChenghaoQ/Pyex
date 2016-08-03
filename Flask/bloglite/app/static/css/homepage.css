@@ -82,6 +82,7 @@ body
     background:rgba(0,0,0,0.9);
     border: 1px solid #111;
     color:white;
+    margin-left:5px;
     
 }
 .back-to-top
@@ -95,4 +96,5 @@ body
     background:rgba(0,0,0,0.9);
     border: 1px solid #111;
     color:white;
+    margin-left:5px;
 }
