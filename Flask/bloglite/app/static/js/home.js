@@ -3,7 +3,22 @@
     'use strict';
     var sidebar =$('#sidebar'),
         sidebar_trigger = $('#sidebar-trigger'),
+        backbutton=$('.back-to-top'),
         main_page=$('#main-page');
+    function backback()
+    {
+        $('html,body').animate({
+            scrollTop:0
+        },800)
+    }
+    
+    function hidebutton()
+    {
+        if($(window).scrollTop() > $(window).height())
+            backbutton.fadeIn();
+        else
+            backbutton.fadeOut();
+    }
     function showSideBar()
     {
         
@@ -26,7 +41,9 @@
                 showSideBar();
     }
     sidebar_trigger.on('click',showhideSideBar)
-
+    backbutton.on('click',backback)
+    $(window).on('scroll',hidebutton)
+    $(window).trigger('scroll')
     
     /*sidebar_trigger.on('click',showSideBar)*/
 })
