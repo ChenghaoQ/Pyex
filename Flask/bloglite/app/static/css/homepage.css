@@ -13,7 +13,7 @@ body
     background:#333;
     color:#fff;
     float:left;
-    
+    transition:left 0.5s;
 
 }
 #sidebar ul
@@ -33,30 +33,66 @@ body
 {
     background:#444;
 }
-.main-page
+#main-page
 {
     height:700px;
     background:white;
-    border:3px solid red;
+
     margin-left:260px;
+    transition:left 0.5s;
 }
-.main-page nav
+#main-page nav
 {
     height:130px;
+    width:inherit;
+    background:#efeeeb;
 }
-.main-page nav ul
+#main-page nav ul
 {
     list-style: none;
+    float:right;
     margin:0;
+    height:inherit;
+    margin-top:100px;
+    
 }
-.main-page nav ul li 
+#main-page nav ul li 
 {
-
     display: inline-block;
 }
-.main-page nav ul li a
+#main-page nav ul li a
 {
     padding:20px 12px;
-    color:white;
+    color:black;
     text-decoration: none;
+}
+#main-page nav .active
+{
+    float:left;
+    margin:0;
+}
+#sidebar-trigger
+{
+    position:fixed;
+    margin-right:20px;
+    width:30px;
+    height:30px;
+    bottom:5px;
+    background:#222;
+    background:rgba(0,0,0,0.9);
+    border: 1px solid #111;
+    color:white;
+    
+}
+.back-to-top
+{
+    position:fixed;
+    bottom:40px;
+    margin-right:20px;
+    width:30px;
+    height:30px;
+    background:#222;
+    background:rgba(0,0,0,0.9);
+    border: 1px solid #111;
+    color:white;
 }
