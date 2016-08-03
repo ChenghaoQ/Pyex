@@ -1,0 +1,30 @@
+.content_wrapper
+{
+    width:75%;
+    margin:0 auto;
+    background:#fefefe;
+    color:#444;
+}
+
+article
+{
+    line-height: 2;/*行高*/
+    padding:10px 0;
+}
+.article_info
+{
+    font-size:14px;
+    color:#666;
+    padding: 15px 0;
+}
+.article_title 
+{
+    width:inherit;
+
+    border: 2px solid red;
+}
+.article_title a
+{
+    border: 2px solid red;
+    margin:0 auto;
+}
