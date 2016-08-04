@@ -17,14 +17,20 @@ article
     color:#666;
     padding: 15px 0;
 }
+.article_header
+{
+    width:100%;
+    text-align: center;
+}
 .article_title 
 {
     width:inherit;
+    
+    margin-bottom: 10px;
+   
 
-    border: 2px solid red;
 }
 .article_title a
 {
-    border: 2px solid red;
     margin:0 auto;
 }

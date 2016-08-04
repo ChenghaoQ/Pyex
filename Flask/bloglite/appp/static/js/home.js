@@ -25,13 +25,13 @@
         sidebar.css('left',0);
         /*main_page.css('margin-left',sidebar.width());*/
         main_page.animate({'margin-left':sidebar.width()})
-        sidebar_trigger.text("☰");
+        sidebar_trigger.text("◀");
     }
     function hideSideBar()
     {
         sidebar.css('left',-sidebar.width());
-        main_page.animate({'margin-left':0})
-        sidebar_trigger.text("➤");
+        main_page.animate({'margin-left':0});
+        sidebar_trigger.text("☰");
     }
     function showhideSideBar()
     {
