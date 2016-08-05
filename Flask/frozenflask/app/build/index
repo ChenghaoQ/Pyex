@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+	
+	<title>Home - microblog</title>
+	
+        <link rel='stylesheet' href='../static/css/article.css'>
+        <link rel='stylesheet' href='../static/css/homepage.css'>
+        <link rel='stylesheet' href='../static/css/normalize.css'>
+    
+    
+    </head>
+    
+    <body>
+        <div id="wrapper">
+        <div id='main-page'>
+            <header>
+                <nav>
+                    <ul>
+                        
+                        <li><a href='#'>首页</a></li>    
+                        <li><a href='#'>文章</a></li> 
+                        <li><a href='#'>归档</a></li> 
+                        <li><a href='#'>关于</a></li>           
+                    </ul>
+                    <div class="logo"><a href="#">老钱</a></div>
+                </nav>
+                <div class="hr"></div>
+            </header>
+            <div class='content'>
+                <div class="content_wrapper">
+                    <div class="article_header">
+                        <h1 class="article_title"><a>看不懂写的啥就对了</a></h1>
+                        
+ <article>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rhoncus odio a efficitur consectetur. Ut nec cursus nibh. Aliquam ultricies ligula eget lorem varius vehicula. Fusce vestibulum lectus ut tortor varius, a blandit lacus consequat. Nullam enim nulla, maximus sit amet congue id, ultricies sed est. Nullam sodales iaculis tortor, quis commodo eros elementum nec. Morbi feugiat bibendum turpis. Donec non tempus neque, nec laoreet eros. Etiam efficitur a neque quis dictum. Aliquam eleifend, dui sit amet vehicula placerat, tortor ipsum rhoncus arcu, sit amet volutpat ligula est rhoncus velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                            
+                            <p>Pellentesque iaculis magna ac enim bibendum ultricies at id tellus. Proin ac velit tempus, commodo nibh ut, condimentum lorem. Suspendisse eu lorem et velit porttitor fringilla. Ut sit amet quam volutpat, vehicula mauris sit amet, tempor magna. Praesent in auctor purus. Phasellus sit amet tortor sed ligula fermentum tristique aliquam ut neque. Suspendisse feugiat, orci vel suscipit faucibus, sem magna euismod felis, sit amet facilisis orci ante vel eros. </p>
+                            <p>Fusce sed neque risus. Maecenas a tellus vitae turpis condimentum euismod. Duis luctus urna risus, sit amet malesuada ipsum fermentum ut. Aenean sagittis ipsum a lacus mollis consectetur. Mauris laoreet convallis justo vitae sagittis. Donec tincidunt magna in ex accumsan vulputate. Aenean semper porta porta. Nulla nec leo sed urna molestie dapibus. Vestibulum condimentum lacus vitae est laoreet convallis. Nullam malesuada justo et vulputate consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus eu porta ligula, sed tincidunt urna. Ut cursus egestas semper. Vivamus sed metus risus. Cras dignissim sagittis ex, eu vehicula dui tempor ut. Vestibulum bibendum dignissim pretium. </p>
+                            <p> iaculis laoreet justo, sit amet congue tellus pharetra a. Integer ut aliquam libero, finibus luctus ante. Proin non neque commodo, cursus nunc a, varius ante. Phasellus non metus erat. Mauris lacinia urna vitae orci dapibus fringilla. Donec ultricies orci eget condimentum mollis. Curabitur commodo feugiat sapien, vel iaculis mi viverra ac. Aliquam scelerisque laoreet pulvinar. Aliquam sit amet massa quis elit pretium aliquam id eget nisl. Sed sed dictum leo, ac auctor eros. Aenean dapibus lorem gravida luctus tempus. Nullam sollicitudin vestibulum placerat. Suspendisse fermentum dolor enim, at porta risus commodo sed. Praesent et nibh ut eros gravida ullamcorper non sed quam. </p>
+                            <p>Sed erat justo, vulputate in iaculis in, blandit a metus. Donec tristique ullamcorper venenatis. In tincidunt metus sapien, vitae laoreet massa auctor non. Etiam lacinia hendrerit est. Sed ultrices quam sed consectetur tincidunt. Aliquam ac rhoncus neque, ac ornare neque. Quisque congue pretium justo et aliquam. Nullam molestie eu tellus eu feugiat. Duis quis justo hendrerit, mollis leo pellentesque, iaculis mauris. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis augue neque, accumsan vitae purus eleifend, suscipit malesuada mauris. Aliquam eleifend lorem at mollis ullamcorper.</p>
+                        </article>
+
+                        <div class="article_info">编辑于2016-8-8 | 浏览:0 </div>
+                    </div>
+                   
+                </div>
+            
+            
+            
+            </div>
+            <footer></footer>
+        
+        
+            <button id="sidebar-trigger">◀</button>
+            <button class="back-to-top">▲</button>
+        
+        
+        
+        
+        
+        </div>
+        
+    
+        
+        
+        
+        
+        
+        
+        <div id='sidebar'>
+            <ul>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+            </ul>
+        
+        </div>
+        </div>
+        <script src="../static/js/jquery.js"></script>
+        <script src="../static/js/home.js"></script>
+    </body>
+
+
+
+
+
+</html>

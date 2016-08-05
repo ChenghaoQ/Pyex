@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+	{% if title %}
+	<title>{{ title }} - microblog</title>
+	{% else %}
+        <title>ChenghaoQ</title>
+	{% endif %}
+        <link rel='stylesheet' href='../static/css/article.css'>
+        <link rel='stylesheet' href='../static/css/homepage.css'>
+        <link rel='stylesheet' href='../static/css/normalize.css'>
+    
+    
+    </head>
+    
+    <body>
+        <div id="wrapper">
+        <div id='main-page'>
+            <header>
+                <nav>
+                    <ul>
+                        
+                        <li><a href='#'>首页</a></li>    
+                        <li><a href='#'>文章</a></li> 
+                        <li><a href='#'>归档</a></li> 
+                        <li><a href='#'>关于</a></li>           
+                    </ul>
+                    <div class="logo"><a href="#">老钱</a></div>
+                </nav>
+                <div class="hr"></div>
+            </header>
+            <div class='content'>
+                <div class="content_wrapper">
+                    <div class="article_header">
+                        <h1 class="article_title"><a>看不懂写的啥就对了</a></h1>
+                        {% block content %}{% endblock %}
+                        <div class="article_info">编辑于2016-8-8 | 浏览:0 </div>
+                    </div>
+                   
+                </div>
+            
+            
+            
+            </div>
+            <footer></footer>
+        
+        
+            <button id="sidebar-trigger">◀</button>
+            <button class="back-to-top">▲</button>
+        
+        
+        
+        
+        
+        </div>
+        
+    
+        
+        
+        
+        
+        
+        
+        <div id='sidebar'>
+            <ul>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+                <li><a href='#'>item</a></li>
+            </ul>
+        
+        </div>
+        </div>
+        <script src="../static/js/jquery.js"></script>
+        <script src="../static/js/home.js"></script>
+    </body>
+
+
+
+
+
+</html>
