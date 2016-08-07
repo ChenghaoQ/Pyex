@@ -1,0 +1,410 @@
+.clearfix:after
+{
+    content:'';
+    display:block;
+    clear:both;
+}
+h2
+{
+    margin:0;
+    padding-top:3%;
+    padding-left:10%;
+    padding-bottom:1%;
+    font-size:35px;
+    height:10%;
+}
+.withline
+{
+    border-bottom: 3px solid black;
+}
+.wrapper
+{
+    max-width:100vw;
+    margin:0 auto;
+}
+body,html
+{
+    margin:0;
+    height:100%;
+    
+
+}
+.main_page
+{
+    width:100%;
+
+}
+.main_page header nav
+{
+    
+    width:100%;
+    height:50px;
+    position:fixed;
+    background: black;
+    background: rgba(0,0,0,0.8);
+    
+}
+.main_page header nav .logotitle
+{
+    padding-left:5%;
+    display: inline-block;
+}
+.main_page header nav .logotitle a
+{
+    float:right;
+    text-decoration: none;
+    color:#fff;
+    font-size:30px;
+    padding-left:10px;
+    
+    display: inline;
+    
+    
+}
+.logo
+{
+    height:49px;
+    width:49px;
+    background:#222 url(../img/logo.jpg);
+    background-size: contain;
+    background-position:center;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.main_page header nav ul
+{
+    list-style:none;
+    margin:0;
+    float:right;
+}
+.main_page header nav ul li
+{
+    display:inline-block;
+    line-height:50px;
+    margin-right:20px;
+}
+.main_page header nav ul li a
+{
+    line-height:inherit;
+    text-decoration: none;
+    display:inline-block;
+    height:inherit;
+    color:#fff;
+}
+.main_page header nav ul li a:hover
+{
+    border-bottom: 5px solid white;
+}
+#banner
+{
+    top:0;
+    bottom:0;
+    width:100%;
+    height:100vh;
+    position:static;
+    background:#888;
+}
+#firm_pic
+{
+    margin-top:0;
+    width:100%;
+    height:100vh;
+    background:#e6a4a4 url(../img/banner1.jpg);
+    background-size: cover;
+    background-attachment: scroll;
+}
+#brief_intro
+{
+    width:100%;
+    height:100vh;
+    background:#ffc4c4;
+}
+.textcard1,.textcard2
+{
+    float:left;
+    height:50vh;
+    width:50%;
+    background-color:#252f34;
+    color:#fff;
+ 
+}
+#brief_intro .subheading
+{
+    position:relative;
+    padding:30px;
+    
+}
+#brief_intro p
+{
+    line-height: 2;
+}
+.textcard2,.imgcard2
+{
+    border-top:1px solid #111;
+}
+.imgcard2
+{
+    float:right;
+    height:50vh;
+    width:50%;
+    background:#252f34 url(../img/copyright.png);
+    background-size: contain;
+    background-position:right;
+    background-repeat:no-repeat;
+
+    
+}
+.imgcard1
+{
+    background:#252f34 url(../img/building.jpg);
+    float:left;
+    height:50vh;
+    width:50%;
+    background-size: contain;
+    background-position:left;
+    background-repeat: no-repeat;
+}
+#products
+{
+    width:100%;
+    height:100vh;
+    background:#403977;
+
+}
+
+#products h2 
+{
+    
+}
+#products .cards-group
+{
+    height:80vh;
+    width:60%;
+    margin-top:0;
+    margin-bottom:2%;
+    margin-left:auto;
+    margin-right:auto;
+    overflow: hidden;
+
+}
+
+#products .card
+{
+    float:left;
+    height:30%;
+    width:31%;
+    box-sizing:border-box;
+    overflow: hidden;
+    background:transparent;
+    
+
+}
+#products .card:first-child
+{
+        width:31%;
+        background:rgba(0,0,0,0.03);
+       
+
+        
+}
+#products .card:nth-child(2)
+{    
+        margin-left:3%;
+        width:31%;
+        background:rgba(0,0,0,0.07)
+}
+#products .card:nth-child(3)
+{
+        margin-left:3%;
+        width:31%;
+        background:rgba(0,0,0,0.11)
+}
+#products .card:nth-child(4)
+{
+        margin-top:3%;
+        width:31%;
+        background:rgba(0,0,0,0.15)
+}
+#products  .card:nth-child(5)
+{
+        margin-top:3%;
+        margin-left:3%;
+        width:65%;
+        background:rgba(0,0,0,0.19)
+}
+#products .card:nth-child(6)
+{
+        margin-top:2.5%;
+        width:60%;
+        background:rgba(0,0,0,0.23);
+        background:transparent url(../img/5.jpg);
+        background-size: contain;
+        background-position:left;
+        background-repeat:no-repeat;
+}
+#products .card:nth-child(7)
+{
+        width:35%;
+        margin-left:3%;
+        margin-top:2.5%;
+        background:rgba(0,0,0,0.20)
+}
+
+#activities
+{
+    width:100%;
+    height:100vh;
+    background:#ffe4b1;
+}
+#activities .timeline 
+{
+    width:80%;
+    margin:0 auto;
+}
+#activities .timeline .time
+{
+    width:80%;
+    height:80px;
+    margin:0 auto;
+}
+#activities .timeline .time ul
+{
+    padding:0 20px;
+    margin: 0 auto;
+    list-style:none;
+    text-align: center;
+    width:90%;
+    height:inherit;
+}
+#activities .timeline .time ul li
+{
+    display:inline-block;
+    width:14%;
+    height:inherit;
+    padding:0;
+    margin:0 0;
+    
+}
+#activities .timeline .time ul li a
+{
+    font-size:30px;
+    text-decoration:none;
+    color:#a24d39;
+    font-weight:700;
+    height:75%;
+    display: block;
+    padding:0 10px;
+    margin:0 0;
+}
+
+#activities .timeline .news
+{
+    width:80%;
+    height:56vh;
+    margin:0 auto;
+}
+#activities .timeline .news ul
+{
+    list-style:none;
+    overflow:hidden;
+    height:inherit;
+}
+#activities .timeline .news ul li
+{
+    height:inherit;
+    width:inherit;
+    line-height:3;
+    padding-top:20px;
+    font-size:20px;
+    
+}
+li.y2011,li.y2012,li.y2013,li.y2014,li.y2015,li.y2016
+{
+    display:none;
+}
+#partners
+{
+    width:100%;
+    height:100vh;
+    background:#8edeae;
+    transition:0.8s;
+}
+#join_us
+{
+    width:100%;
+    height:100vh;
+    background:#fefefe;
+}
+#join_us .code
+{
+    width:250px;;
+    height:250px;;
+    margin:15vh auto 20vh 15%;
+    background:#333 url(../img/code.png);
+    background-size: contain;
+    background-position:right;
+    background-repeat:no-repeat;
+    display: inline-block;
+    
+    
+}
+#join_us .text
+{
+    margin:5vh 5% 20vh auto;
+    background:#fefefe;
+    width:50vw;
+    height:65vh;
+    display: inline-block;
+    float:right;
+    vertical-align: middle;
+}
+#join_us .text h2
+{
+    margin:60px auto 70px auto;
+    font-size: 20px;
+
+}
+
+#join_us .text p
+{
+    margin-top:10px;
+    text-align: center;
+}
+footer
+{
+
+    background:#333;
+    color:#fff;
+    min-height:230px;    
+    text-align: center;
+}
+footer .share-group
+{
+    display:block;
+    padding-top:30px;
+    margin-bottom:20px;
+    padding-left:0;
+    list-style: none;
+    width:inherit;
+    text-align: center;
+    
+    
+}
+.share-group li
+{
+    margin: 0 auto;
+    display:inline-block;
+    padding:15px;
+}
+footer .share-group li a
+{
+
+    
+    text-decoration: none;
+    color:#fff;
+}
+.copyright
+{
+    margin:0 auto;
+    margin-top:80px;
+}
