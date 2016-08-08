@@ -117,3 +117,43 @@ body
     font-size:19px;
 
 }
+footer
+{
+
+    background:#efeeeb;
+    color:#666;
+    min-height:130px;    
+    text-align: center;
+    margin-bottom:0;
+}
+footer .share-group
+{
+    display:block;
+    padding-top:30px;
+    margin-bottom:20px;
+    padding-left:0;
+    list-style: none;
+    width:inherit;
+    text-align: center;
+    
+    
+}
+.share-group li
+{
+    margin: 0 auto;
+    display:inline-block;
+    padding:15px;
+}
+footer .share-group li a
+{
+
+    
+    text-decoration: none;
+    color:#666;
+}
+.copyright
+{
+    margin:0 auto;
+    margin-top:30px;
+    padding-bottom:20px;
+}

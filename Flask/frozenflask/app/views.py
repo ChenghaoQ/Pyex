@@ -6,8 +6,8 @@ from app import app,articles
 
 
 #set the articlelist route
-@app.route('/')
-def home():
+@app.route('/posts')
+def posts():
 	#posts = [article for article in articles if 'date' in article.meta]
 	posts=[]
 	for article in articles:
@@ -18,7 +18,7 @@ def home():
 
 	sorted_posts = sorted(posts,reverse = True,key = lambda page:page.meta['date'])
 	#pages may related to template index.html
-	return render_template('index.html',pages = sorted_posts)
+	return render_template('posts.html',pages = sorted_posts)
 
 
 

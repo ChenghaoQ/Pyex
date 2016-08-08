@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<ul class="post_list">
+    {% for page in pages %}
+<li class="post_preview">
+    <div class="post_header">
+        <div class="post_title">{{ page.meta.title }}</div>
+        <div class="post_info">{{ page.meta.date }}</div>
+    </div>
+    <div class="post_body">{{ page }}</div>
+    <div class="more link_tag"><a href="{{ url_for('page', path=page.path) }}">More -></a></div>
+</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
