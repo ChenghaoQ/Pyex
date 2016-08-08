@@ -1,0 +1,40 @@
+.content_wrapper
+{
+    width:65%;
+    margin:0 auto;
+}
+.post_preview
+{
+    color:#444;
+    margin:80px auto 0 auto;
+}
+.post_preview .post_title
+{
+    margin-top:20px;
+    margin-bottom: 5px;
+    font-size:28px;
+    font-weight:500;
+    
+}
+.post_preview .post_info
+{
+    margin-top:15px;
+    margin-bottom:20px;
+    font-size:14px;
+    color:#666;
+}
+
+.post_preview .post_body
+{
+    line-height:2;
+}
+.post_preview .post_body p
+{
+    margin-bottom:20px;
+}
+.post_preview .more
+{
+    width:inherit;
+    float:right;
+    padding-right:50px;
+}
