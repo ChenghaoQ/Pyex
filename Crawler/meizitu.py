@@ -1,7 +1,7 @@
 import urllib.request
 import re
 import time
-
+import gzip
 
 def youmeizi():
 	header = {
@@ -22,13 +22,13 @@ def youmeizi():
 			girls_basket.append(each)
 		page+=1
 	for link in girls_link:
-		f = open(str(girl)+'.jpg','wb')
-		req1 = urllib.request.Request(link,headers = header)
-		opened1 = urllib.request.urlopen(req1)
-		buf = opened1.read()
-		f.write(buf)
+		a = open(str(girl)+'.jpg','wb')
+		b = urllib.request.Request(link,headers = {"Accept-Encoding": "gzip"})
+		c = urllib.request.urlopen(b)
+		d = gzip.GzipFile(fileobj = c)
+		e = d.read()
+		a.write(e)
 		print("No. %d Girl downloaded"%girl)
-		girl+=1
-
+		girl += 1
 
 youmeizi()
