@@ -27,6 +27,6 @@ def youmeizi():
 			a.write(e)
 			print("No. %d Girl downloaded"%girl)
 			girl += 1
-		
+		page+=1	
 
 youmeizi()
