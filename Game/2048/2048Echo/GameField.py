@@ -1,75 +1,7 @@
-import os
 from random import randrange,choice     #randrange is randint + randchoice
+import os
 from collections import defaultdict #still not sure what does defaultdict
-
 actions=['Up','Left','Down','Right','Restart','Exit']
-letter_code=[ch for ch in 'WASDRQwasdrq']   
-action_dict=dict(zip(letter_code,actions*2)) 
-#Main function
-
-
-#@ask.launch
-def init(): # reset the game field and restart the game
-	game_field.reset() # using game_field not GameField because there is a statement below
-	return 'Game'	#can we use dictionary like this? why>
-
-'''def not_game(state): #Not game status is for gameover or win after game
-	game_field.draw()   #other than self, there is another variable in it
-	action = get_user_action()#where is this
-	response = defaultdict(lambda:state) #default is current status, no action will keep the current status
-	response['Restart'],response['Exit'] ='Init','Exit' # Restart need to  init again, exit just exit
-	
-	return response[action]#Return the users respones'''
-def game():
-	os.system('clear')
-	game_field.draw() # draw the current field status
-	action=get_user_action()#get useer action
-
-	if action =='Restart':
-		return 'Init'
-	if action =='Exit':
-		return 'Exit'
-	if game_field.move(action): # move successful ( move not none)
-		if game_field.is_win():
-			return 'Win'
-		if game_field.is_gameover():
-			return 'Gameover'
-	return 'Game'
-
-state_actions ={'Init':init,  #put state into a dictionary
-		'Win':lambda:not_game('Win'),
-		'Gameover':lambda:not_game('Gameover'),
-		'Game':game
-	}
-
-#curses.use_default_colors()
-game_field=GameField(win=32) # how to change to Mac
-
-state='Init' # initialize the state
-
-# circulated the status machine
-while state !='Exit':
-	state = state_actions[state]() # state_action[state] from dictionary actually is a function, so put the argument in the ()	
-
-
-
-
-
-
-
-
-def get_user_action(): #Where does keyboard comes from, input?
-	char="N"
-	while char not in action_dict:  #while user input doesn't match action_dict
-		char = input("Please input the direction: ")
-		#char=keyboard.getch()#?????getch???
-	return action_dict[char]
-#转置
-def transpose(field):
-	return [list(row) for row in zip(*field)]#matrix turn 90 clockwise, reason is using zip to get first letter of each row(first column) to make a new first row, ohters are the same
-#Inverse
-def invert(field):
-	return [row[::-1] for row in field] #matix get inverted, [::-1] is for invert a string
 
 class GameField(object): #where did screen, direction comes from
 	def __init__(self,height=4,width=4,win=2048): #init the args to the self, Recently error write init wrong will cause the class object take no(arg)
@@ -99,7 +31,7 @@ class GameField(object): #where did screen, direction comes from
 		def draw_row(row):# shows how to draw the row, calls later
 			cast(''.join('|{: ^5} '.format(num) if num > 0 else '|      ' for num in row) + '|')# what ??
 
-		os.system('cleae') # refresh the screen
+		os.system('clear') # refresh the screen
 		cast('SCORE: ' + str(self.score))  # display the score
 		if 0 != self.highscore:
 			cast('HIGHSCORE: ' + str(self.highscore))
@@ -188,16 +120,6 @@ class GameField(object): #where did screen, direction comes from
 	def is_gameover(self):
 			return not any(self.move_is_possible(move) for move in actions) #when is_win is false and cannot move, gameover
 
-
-
-		
-		
-
-
-
-
-
-
 	def reset(self):  #this function mention in __init__ for reset the game,not restart
 		if self.score > self.highscore:  #assert if the current score higher than record
 			self.highscore=self.score  #reset the highscore 
@@ -206,13 +128,11 @@ class GameField(object): #where did screen, direction comes from
 		self.spawn()
 		self.spawn()  #line 50,51 is for put serveral number on gamefield to initialize the game
 	
+
+def transpose(field):
+	return [list(row) for row in zip(*field)]#matrix turn 90 clockwise, reason is using zip to get first letter of each row(first column) to make a new first row, ohters are the same
+#Inverse
+def invert(field):
+	return [row[::-1] for row in field] #matix get inverted, [::-1] is for invert a string
 			
 		
-	
-
-
-
-
-#License
-
-#本作品在 GFDL1.2 协议下授权使用,ekCit作品
